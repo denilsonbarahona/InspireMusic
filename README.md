@@ -116,16 +116,11 @@ InspireMusic is a unified music, song and audio generation framework through the
     </tr>
     <tr>
       <td style="text-align:center;">
-<b>Figure 1.</b> An overview of the InspireMusic framework.
-
-We introduce InspireMusic, a unified framework for music, song, and audio generation capable of producing high-quality 48kHz long-form audio. InspireMusic consists of three key components:
-
+<b>Figure 1.</b> An overview of the InspireMusic framework. We introduce InspireMusic, a unified framework for music, song, and audio generation capable of producing high-quality 48kHz long-form audio. InspireMusic consists of three key components:
 - **Dual Audio Tokenizers**:
 The framework first converts raw audio waveforms into discrete tokens that are efficiently processed by the autoregressive model. We employ two tokenizers: WavTokenizer converts 24kHz audio into 75Hz discrete tokens, while Hifi-Codec transforms 48kHz audio into 150Hz latent features suited for our flow matching model.
-
 - **Autoregressive Transformer**:
 This component is trained using a next-token prediction approach on both text and audio tokens, enabling it to generate coherent and contextually relevant audio sequences.
-
 - **Super-Resolution Flow Matching** Model:
 An ODE-based diffusion model, specifically a super-resolution flow matching (SRFM) model, maps the lower-resolution audio tokens to latent features with a higher sampling rate. A vocoder then generates the final audio waveform from these enhanced latent features.
 

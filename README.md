@@ -168,7 +168,7 @@ Currently support on CUDA Version 11.x.
 cd InspireMusic
 # You can run to install the packages
 python setup.py install
-pip install flash-attn --no-build-isolation
+pip install flash-attn==2.6.2 --no-build-isolation
 ```
 
 We also recommend having `sox` or `ffmpeg` installed, either through your system or Anaconda:

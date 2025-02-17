@@ -147,7 +147,7 @@ git submodule update --init --recursive
 ```
 
 ### Install
-InspireMusic requires Python 3.8, PyTorch 2.0.1. To install InspireMusic, you can run one of the following:
+InspireMusic requires Python 3.8, PyTorch 2.0.1, flash attention 2.6.2. To install InspireMusic, you can run one of the following:
 
 - Install Conda: please see https://docs.conda.io/en/latest/miniconda.html
 - Create Conda env:
@@ -158,7 +158,7 @@ cd InspireMusic
 # pynini is required by WeTextProcessing, use conda to install it as it can be executed on all platforms.
 conda install -y -c conda-forge pynini==2.1.5
 pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host=mirrors.aliyun.com
-# install flash attention to speedup training, support version 2.6.3
+# install flash attention to speedup training, support version 2.6.2
 pip install flash-attn --no-build-isolation
 ```
 Currently support on CUDA Version 11.x.

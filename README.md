@@ -118,7 +118,18 @@ InspireMusic is a unified music, song and audio generation framework through the
       <td style="text-align:center;">
 <b>Figure 1.</b> An overview of the InspireMusic framework.
 
-We introduce InspireMusic, a unified framework for music, song and audio generation, capable of producing 48kHz long-form audio. InspireMusic employs an autoregressive transformer to generate music tokens in response to textual input. Complementing this, an ODE-based diffusion model, specifically flow matching, is utilized to reconstruct latent features from these generated music tokens. Then a vocoder generates audio waveforms from the reconstructed features. for input text, an ODE-based diffusion model, flow matching, to reconstruct latent features from the generated music tokens, and a vocoder to generate audio waveforms. InspireMusic is capable of text-to-music, music continuation, music reconstruction, and music super resolution tasks. It employs WavTokenizer as an audio tokenizer to convert 24kHz audio into 75Hz discrete tokens, while HifiCodec serves as a music tokenizer, transforming 48kHz audio into 150Hz latent features compatible with the flow matching model.
+We introduce InspireMusic, a unified framework for music, song, and audio generation capable of producing high-quality 48kHz long-form audio. InspireMusic consists of three key components:
+
+- **Dual Audio Tokenizers**:
+The framework first converts raw audio waveforms into discrete tokens that are efficiently processed by the autoregressive model. We employ two tokenizers: WavTokenizer converts 24kHz audio into 75Hz discrete tokens, while Hifi-Codec transforms 48kHz audio into 150Hz latent features suited for our flow matching model.
+
+- **Autoregressive Transformer**:
+This component is trained using a next-token prediction approach on both text and audio tokens, enabling it to generate coherent and contextually relevant audio sequences.
+
+- **Super-Resolution Flow Matching** Model:
+An ODE-based diffusion model, specifically a super-resolution flow matching (SRFM) model, maps the lower-resolution audio tokens to latent features with a higher sampling rate. A vocoder then generates the final audio waveform from these enhanced latent features.
+
+InspireMusic supports a range of tasks including text-to-music, music continuation, music reconstruction, and music super-resolution.
       </td>
     </tr>
   </table>

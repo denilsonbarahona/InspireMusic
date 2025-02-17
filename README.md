@@ -70,6 +70,16 @@ InspireMusic is a fundamental AIGC toolkit and models designed for music, song, 
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/FunAudioLLM/InspireMusic) Please support our community project 💖 by starring it on GitHub 加⭐支持 🙏 
 
+[**Highlights**](#Highlights)
+| [**News**](https://github.com/FunAudioLLM/InspireMusic#News) 
+| [**Introduction**](#Introduction)
+| [**Installation**](#Installation)
+| [**Quick Start**](https://github.com/FunAudioLLM/InspireMusic#QuickStart)
+| [**Tutorial**](https://github.com/FunAudioLLM/InspireMusic#Tutorial)
+| [**Models**](https://github.com/FunAudioLLM/InspireMusic#Models)
+| [**Contact**](https://github.com/FunAudioLLM/InspireMusic#Contact)
+
+
 ---
 <a name="Highligts"></a>
 ## Highlights
@@ -79,7 +89,7 @@ InspireMusic is a fundamental AIGC toolkit and models designed for music, song, 
 - Support long-form audio generation.
 - Convenient fine-tuning and inference. Support mixed precision training (BF16, FP16/FP32). Provide convenient fine-tuning and inference scripts and strategies, allowing users to easily fine-tune their music generation models.
 
-<a name="What's News"></a>
+<a name="News"></a>
 ## What's New 🔥
 - 2025/02: Online demo is available on [ModelScope Space](https://modelscope.cn/studios/iic/InspireMusic/summary) and [HuggingFace Space](https://huggingface.co/spaces/FunAudioLLM/InspireMusic).
 - 2025/01: Open-source [InspireMusic-Base](https://modelscope.cn/models/iic/InspireMusic/summary), [InspireMusic-Base-24kHz](https://modelscope.cn/models/iic/InspireMusic-Base-24kHz/summary), [InspireMusic-1.5B](https://modelscope.cn/models/iic/InspireMusic-1.5B/summary), [InspireMusic-1.5B-24kHz](https://modelscope.cn/models/iic/InspireMusic-1.5B-24kHz/summary), [InspireMusic-1.5B-Long](https://modelscope.cn/models/iic/InspireMusic-1.5B-Long/summary) models for music generation. Models are available on both ModelScope and HuggingFace. 
@@ -87,6 +97,7 @@ InspireMusic is a fundamental AIGC toolkit and models designed for music, song, 
 - 2024/11: Welcome to preview 👉🏻 [**InspireMusic Demos**](https://iris2c.github.io/InspireMusic) 👈🏻. We're excited to share this with you and are working hard to bring even more features and models soon. Your support and feedback mean a lot to us!
 - 2024/11: We are thrilled to announce the open-sourcing of the **InspireMusic** [code repository](https://github.com/FunAudioLLM/InspireMusic) and [demos](https://iris2c.github.io/InspireMusic). **InspireMusic** is a unified framework for music, song, and audio generation, featuring capabilities such as text-to-music conversion, music structure, genre control, and timestamp management. InspireMusic stands out for its exceptional music generation and instruction-following abilities.
 
+<a name="Introduction"></a>
 ## Introduction
 > [!Note]
 > This repo contains the algorithm infrastructure and some simple examples. Currently only support English text prompts.
@@ -113,6 +124,7 @@ We introduce InspireMusic, a unified framework for music, song and audio generat
   </table>
 </p>
 
+<a name="Installation"></a>
 ## Installation
 
 ### Clone
@@ -165,6 +177,7 @@ sudo apt-get install ffmpeg
 sudo yum install ffmpeg
 ```
 
+<a name="QuickStart"></a>
 ### Quick Start
 
 Here is a quick example inference script for music generation. 
@@ -239,7 +252,7 @@ if __name__ == "__main__":
   # use both text prompt and audio prompt
   model.inference("continuation", "Continue to generate jazz music.", "audio_prompt.wav")
 ```
-
+<a name="Models"></a>
 ## Models
 ### Download Model
 
@@ -270,6 +283,7 @@ The table below presents the links to the ModelScope and Huggingface model hub. 
 | Music_tokenizer (75Hz)                | [![model](https://img.shields.io/badge/ModelScope-Model-green.svg)](https://modelscope.cn/models/iic/InspireMusic-1.5B-24kHz/file/view/master?fileName=music_tokenizer%252Fmodel.pt) [![model](https://img.shields.io/badge/HuggingFace-Model-green.svg)](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz/tree/main/music_tokenizer) | A music tokenizer based on HifiCodec<sup>[2]</sup> at 24kHz audio.                                 |
 | Music_tokenizer (150Hz)               | [![model](https://img.shields.io/badge/ModelScope-Model-green.svg)](https://modelscope.cn/models/iic/InspireMusic-1.5B-Long/file/view/master?fileName=music_tokenizer%252Fmodel.pt) [![model](https://img.shields.io/badge/HuggingFace-Model-green.svg)](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long/tree/main/music_tokenizer) | A music tokenizer based on HifiCodec at 48kHz audio.                                               |
 
+<a name="Tutorial"></a>
 ## Basic Usage
 
 At the moment, InspireMusic contains the training code and inference code for [music generation](https://github.com/FunAudioLLM/InspireMusic/tree/main/examples/music_generation). More tasks such as song generation and audio generation will be supported in future.
@@ -377,7 +391,12 @@ For normal mode, we recommend using hardware with at least 24GB of GPU memory fo
     - [x] Support to generate 48kHz
     - [x] 75Hz InspireMusic-1.5B model for music generation
     - [x] 75Hz InspireMusic-1.5B-Long model for long-form music generation
-    
+
+- [ ] 2025/02
+    - [ ] Technical report v1
+    - [ ] Provide docker image
+    - [ ] Runtime SDK 
+
 - [ ] 2025/03
     - [ ] Support song generation task
     - [ ] 75Hz InspireSong model for song generation
@@ -408,6 +427,7 @@ Checkout some awesome Github repositories from Tongyi Lab, Alibaba Group.
         <img alt="Demo" src="https://img.shields.io/badge/Repo | Space-SenseVoice?labelColor=&label=SenseVoice&color=green"></a>
 </p>
 
+<a name="Contact"></a>
 ## Community & Discussion
 * Please support our community project 🌟 by starring it on GitHub 🙏
 * Welcome to join our DingTalk and WeChat groups to share and discuss algorithms, technology, and user experience feedback. You may scan the following QR codes to join our official chat groups accordingly. 

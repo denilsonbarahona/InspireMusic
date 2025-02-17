@@ -159,7 +159,7 @@ cd InspireMusic
 conda install -y -c conda-forge pynini==2.1.5
 pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host=mirrors.aliyun.com
 # install flash attention to speedup training, support version 2.6.2
-pip install flash-attn --no-build-isolation
+pip install flash-attn==2.6.2 --no-build-isolation
 ```
 Currently support on CUDA Version 11.x.
 

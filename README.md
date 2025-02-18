@@ -14,9 +14,9 @@
 
 <p align="center">
  <a href="https://funaudiollm.github.io/inspiremusic" target="_blank">
-        <img alt="Demo" src="https://img.shields.io/badge/Demo%20👈🏻-InspireMusic?labelColor=%20%23FDB062&label=InspireMusic&color=%20%23f79009"></a>
+        <img alt="Demo" src="https://img.shields.io/badge/Demo-InspireMusic?labelColor=%20%23FDB062&label=InspireMusic&color=%20%23f79009"></a>
 <a href="https://github.com/FunAudioLLM/InspireMusic" target="_blank">
-        <img alt="Code" src="https://img.shields.io/badge/Code%20⭐-InspireMusic?labelColor=%20%237372EB&label=InspireMusic&color=%20%235462eb"></a>
+        <img alt="Code" src="https://img.shields.io/badge/Code-InspireMusic?labelColor=%20%237372EB&label=InspireMusic&color=%20%235462eb"></a>
 
 <a href="https://modelscope.cn/models/iic/InspireMusic-1.5B-Long" target="_blank">
         <img alt="Model" src="https://img.shields.io/badge/InspireMusic-Model-green"></a>
@@ -146,8 +146,9 @@ cd InspireMusic
 git submodule update --init --recursive
 ```
 
-### Install
-InspireMusic requires Python 3.8, PyTorch 2.0.1, flash attention 2.6.2. To install InspireMusic, you can run one of the following:
+### Install from Source
+
+InspireMusic requires Python 3.8, PyTorch 2.0.1, flash attention 2.6.2/2.6.3. For CUDA 11.x, you can install the dependencies with the following commands:
 
 - Install Conda: please see https://docs.conda.io/en/latest/miniconda.html
 - Create Conda env:
@@ -158,17 +159,16 @@ cd InspireMusic
 # pynini is required by WeTextProcessing, use conda to install it as it can be executed on all platforms.
 conda install -y -c conda-forge pynini==2.1.5
 pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host=mirrors.aliyun.com
-# install flash attention to speedup training, support version 2.6.2
-pip install flash-attn==2.6.2 --no-build-isolation
+# install flash attention to speedup training, support version 2.6.2/2.6.3
+pip install flash-attn --no-build-isolation
 ```
-Currently support on CUDA Version 11.x.
 
 - Install within the package:
 ```sh
 cd InspireMusic
 # You can run to install the packages
 python setup.py install
-pip install flash-attn==2.6.2 --no-build-isolation
+pip install flash-attn --no-build-isolation
 ```
 
 We also recommend having `sox` or `ffmpeg` installed, either through your system or Anaconda:
@@ -184,6 +184,19 @@ sudo yum install sox sox-devel
 sudo apt-get install ffmpeg
 # centos
 sudo yum install ffmpeg
+```
+
+### Use Docker
+Run the following command to build a docker image from Dockerfile provided.
+
+```sh
+docker build -t inspiremusic .
+```
+
+Run the following command to start the docker container in interactive mode.
+
+```shell
+docker run -ti --gpus all -v .:/workspace/InspireMusic inspiremusic
 ```
 
 <a name="QuickStart"></a>
@@ -403,7 +416,7 @@ For normal mode, we recommend using hardware with at least 24GB of GPU memory fo
 
 - [ ] 2025/02
     - [ ] Technical report v1
-    - [ ] Provide docker image
+    - [x] Provide Dockerfile
     - [ ] Runtime SDK 
 
 - [ ] 2025/03

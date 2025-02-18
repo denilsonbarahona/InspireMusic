@@ -118,7 +118,7 @@ class LLM(torch.nn.Module):
         encoder_name = encoder_conf.pop("name", "transformer")
         model = None
         if encoder_name == "transformer":
-            from inspiremusic.transformer.encoder.conformer_encoder import ConformerEncoder
+            from inspiremusic.transformer.conformer_encoder import ConformerEncoder
             model = ConformerEncoder(
                     **encoder_conf,
                     input_size=self.input_size,
@@ -126,25 +126,19 @@ class LLM(torch.nn.Module):
                     macaron_style=False,
             )
         elif encoder_name == "conformer":
-            from inspiremusic.transformer.encoder.conformer_encoder import ConformerEncoder
+            from inspiremusic.transformer.conformer_encoder import ConformerEncoder
             model = ConformerEncoder(
                     **encoder_conf,
                     input_size=self.input_size,
             )
         elif encoder_name == "llama_encoder":
-            from inspiremusic.transformer.encoder.llama_encoder import LlamaEncoder
+            from inspiremusic.transformer.llama_encoder import LlamaEncoder
             model = LlamaEncoder(
                     **encoder_conf,
                     input_size=self.input_size,
             )
-        elif encoder_name == "qwen2":
-            from inspiremusic.transformer.encoder.qwen_encoder import QwenEncoder
-            model = QwenEncoder(
-                    **encoder_conf,
-                    input_size=self.input_size,
-            )
-        elif encoder_name == "qwen2.5":
-            from inspiremusic.transformer.encoder.qwen_encoder import QwenEncoder
+        elif "qwen" in encoder_name:
+            from inspiremusic.transformer.qwen_encoder import QwenEncoder
             model = QwenEncoder(
                     **encoder_conf,
                     input_size=self.input_size,

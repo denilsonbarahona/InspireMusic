@@ -102,7 +102,7 @@ def trim_audio(audio_file, cut_seconds=5):
 	torchaudio.save(output_path, cutted_audio, sr)
 	return output_path
 
-@spaces.GPU()
+@spaces.GPU(duration=120)
 def music_generation(args):
 	set_env_variables()
 	model = InspireMusicUnified(
@@ -156,7 +156,7 @@ def main():
 		gr.Markdown("""
 		# InspireMusic
 		- Support music generation tasks with long-form and high audio quality, sampling rates up to 48kHz. 
-		- Github: https://github.com/FunAudioLLM/InspireMusic/
+		- Github: https://github.com/FunAudioLLM/InspireMusic/  |  ModelScope Studio: https://modelscope.cn/studios/iic/InspireMusic
 		- Available music generation models: [InspireMusic-1.5B-Long](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long), [InspireMusic-1.5B](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B), [InspireMusic-Base](https://huggingface.co/FunAudioLLM/InspireMusic-Base), [InspireMusic-1.5B-24kHz](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz), [InspireMusic-Base-24kHz](https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz). Both on Huggingface and ModelScope.
 		- Currently only support English text prompts.
 		- This page is for demo purpose, if you want to generate long-form audio, e.g., 5mins, please try to deploy locally. Thank you for your support.

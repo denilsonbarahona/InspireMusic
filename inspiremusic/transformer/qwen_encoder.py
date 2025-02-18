@@ -23,7 +23,7 @@ class QwenEncoder(nn.Module):
     def __init__(
             self,
             input_size: int,
-            dtype: str = "bf16",
+            dtype: str = "fp16",
             pretrain_path: str = "Qwen/Qwen2.0-0.5B",
             trainable: bool = False,
             do_fusion_emb: bool = False,
@@ -91,7 +91,7 @@ class QwenEmbeddingEncoder(nn.Module):
     def __init__(
             self,
             input_size: int,
-            dtype: str = "bf16",
+            dtype: str = "fp16",
             pretrain_path: str = "Qwen/Qwen2.0-0.5B",
     ):
         super(QwenEmbeddingEncoder, self).__init__()
@@ -140,7 +140,7 @@ class QwenInputOnlyEncoder(nn.Module):
     def __init__(
             self,
             input_size: int,
-            dtype: str = "bf16",
+            dtype: str = "fp16",
             pretrain_path: str = "Qwen/Qwen2.0-0.5B",
     ):
         super(QwenInputOnlyEncoder, self).__init__()

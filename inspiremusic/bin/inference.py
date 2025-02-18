@@ -42,6 +42,8 @@ def get_args():
     parser.add_argument('--wavtokenizer', required=True, help='wavtokenizer model file')
     parser.add_argument('--chorus', default="random",required=False, help='chorus tag generation mode, eg. random, verse, chorus, intro.')
     parser.add_argument('--fast', action='store_true', required=False, help='True: fast inference mode, without flow matching for fast inference. False: normal inference mode, with flow matching for high quality.')
+	parser.add_argument('--dtype', type=str, default="fp16", required=False,
+						choices=["fp16", "bf16", "fp32"], help='data type')
     parser.add_argument('--fp16', default=True, type=bool, required=False, help='inference with fp16 model')
     parser.add_argument('--fade_out', default=True, type=bool, required=False, help='add fade out effect to generated audio')
     parser.add_argument('--fade_out_duration', default=1.0, type=float, required=False, help='fade out duration in seconds')
@@ -89,7 +91,7 @@ def main():
 	with open(args.config, 'r') as f:
 		configs = load_hyperpyyaml(f)
 
-	model = InspireMusicModel(configs['llm'], configs['flow'], configs['hift'], configs['wavtokenizer'], args.fast, args.fp16)
+	model = InspireMusicModel(configs['llm'], configs['flow'], configs['hift'], configs['wavtokenizer'], args.dtype, args.fast, args.fp16)
 
 	model.load(args.llm_model, args.flow_model, args.music_tokenizer, args.wavtokenizer)
 

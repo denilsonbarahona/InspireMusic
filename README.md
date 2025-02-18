@@ -305,7 +305,7 @@ The table below presents the links to the ModelScope and Huggingface model hub. 
 | Music_tokenizer (75Hz)                | [![model](https://img.shields.io/badge/ModelScope-Model-green.svg)](https://modelscope.cn/models/iic/InspireMusic-1.5B-24kHz/file/view/master?fileName=music_tokenizer%252Fmodel.pt) [![model](https://img.shields.io/badge/HuggingFace-Model-green.svg)](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz/tree/main/music_tokenizer) | A music tokenizer based on HifiCodec<sup>[2]</sup> at 24kHz audio.                                 |
 | Music_tokenizer (150Hz)               | [![model](https://img.shields.io/badge/ModelScope-Model-green.svg)](https://modelscope.cn/models/iic/InspireMusic-1.5B-Long/file/view/master?fileName=music_tokenizer%252Fmodel.pt) [![model](https://img.shields.io/badge/HuggingFace-Model-green.svg)](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long/tree/main/music_tokenizer) | A music tokenizer based on HifiCodec at 48kHz audio.                                               |
 
-⚠️ LIMITATION: Our models have been trained within a limited budget, and there is still significant potential for performance improvement. We are actively working on enhancing the model's performance.
+Our models have been trained within a limited budget, and there is still significant potential for performance improvement. We are actively working on enhancing the model's performance.
 
 <a name="Tutorial"></a>
 ## Basic Usage

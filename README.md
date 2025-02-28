@@ -463,14 +463,19 @@ Checkout some awesome Github repositories from Tongyi Lab, Alibaba Group.
         <a href="./asset/QR.jpg"><img alt="FunAudioLLM in DingTalk" src="https://img.shields.io/badge/FunAudioLLM-DingTalk-d9d9d9"></a>
       </td>
       <td style="text-align:center;">
+        <a href="./asset/QR.jpg"><img alt="InspireMusic in DingTalk" src="https://img.shields.io/badge/InspireMusic-DingTalk-d9d9d9"></a>
+      </td>
+      <td style="text-align:center;">
         <a href="./asset/QR.jpg"><img alt="InspireMusic in WeChat" src="https://img.shields.io/badge/InspireMusic-WeChat-d9d9d9"></a>
       </td>
     </tr>
     <tr>
        <td style="text-align:center;">
-      <img alt="Light" src="./asset/dingding.png" width="68%" />
+      <img alt="Light" src="./asset/dingding.png" width="33%" />
       <td style="text-align:center;">
-      <img alt="Light" src="./asset/QR.jpg" width="58%" />
+      <img alt="Light" src="./asset/dingtalk.jpg" width="33%" />
+      <td style="text-align:center;">
+      <img alt="Light" src="./asset/QR.jpg" width="33%" />
       </td>
     </tr>
   </table>

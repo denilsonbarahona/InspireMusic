@@ -473,7 +473,7 @@ Checkout some awesome Github repositories from Tongyi Lab, Alibaba Group.
        <td style="text-align:center;">
       <img alt="Light" src="./asset/dingding.png" width="33%" />
       <td style="text-align:center;">
-      <img alt="Light" src="./asset/dingtalk.jpg" width="33%" />
+      <img alt="Light" src="./asset/dingtalk.png" width="33%" />
       <td style="text-align:center;">
       <img alt="Light" src="./asset/QR.jpg" width="33%" />
       </td>

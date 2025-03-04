@@ -27,8 +27,8 @@
 <a href="https://huggingface.co/spaces/FunAudioLLM/InspireMusic" target="_blank">
         <img alt="Space" src="https://img.shields.io/badge/HuggingFace-Spaces?labelColor=%20%239b8afb&label=Spaces&color=%20%237a5af8"></a>
 
-<a href="https://arxiv.org/abs/" target="_blank">
-        <img alt="Paper" src="https://img.shields.io/badge/arXiv-Paper-lightgrey"></a>
+<a href="http://arxiv.org/abs/2503.00084" target="_blank">
+        <img alt="Paper" src="https://img.shields.io/badge/arXiv-Paper-green"></a>
 <a href="https://github.com/FunAudioLLM/InspireMusic" target="_blank">
 
 [//]: # (<a href="https://huggingface.co/FunAudioLLM/InspireMusic-Base" target="_blank">)
@@ -81,7 +81,7 @@ InspireMusic is a fundamental AIGC toolkit and models designed for music, song, 
 
 
 ---
-<a name="Highligts"></a>
+<a name="Highlights"></a>
 ## Highlights
 **InspireMusic** focuses on music generation, song generation and audio generation.
 - A unified framework for music/song/audio generation. Controllable with text prompts, music genres, music structures, etc.
@@ -91,6 +91,7 @@ InspireMusic is a fundamental AIGC toolkit and models designed for music, song, 
 
 <a name="News"></a>
 ## What's New 🔥
+- 2025/03: InspireMusic [Technical Report](http://arxiv.org/abs/2503.00084) is available.
 - 2025/02: Online demo is available on [ModelScope Space](https://modelscope.cn/studios/iic/InspireMusic/summary) and [HuggingFace Space](https://huggingface.co/spaces/FunAudioLLM/InspireMusic).
 - 2025/01: Open-source [InspireMusic-Base](https://modelscope.cn/models/iic/InspireMusic/summary), [InspireMusic-Base-24kHz](https://modelscope.cn/models/iic/InspireMusic-Base-24kHz/summary), [InspireMusic-1.5B](https://modelscope.cn/models/iic/InspireMusic-1.5B/summary), [InspireMusic-1.5B-24kHz](https://modelscope.cn/models/iic/InspireMusic-1.5B-24kHz/summary), [InspireMusic-1.5B-Long](https://modelscope.cn/models/iic/InspireMusic-1.5B-Long/summary) models for music generation. Models are available on both ModelScope and HuggingFace. 
 - 2024/12: Support to generate 48kHz audio with super resolution flow matching.
@@ -416,27 +417,39 @@ For normal mode, we recommend using hardware with at least 24GB of GPU memory fo
     - [x] 75Hz InspireMusic-1.5B model for music generation
     - [x] 75Hz InspireMusic-1.5B-Long model for long-form music generation
 
-- [ ] 2025/02
-    - [ ] Technical report v1
+- [x] 2025/02
+    - [x] Technical report v1
     - [x] Provide Dockerfile
-    - [ ] Runtime SDK 
 
 - [ ] 2025/03
+    - [ ] Support audio generation task
+    - [ ] 75Hz InspireAudio model for audio generation
+
+- [ ] 2025/05
     - [ ] Support song generation task
     - [ ] 75Hz InspireSong model for song generation
 
-- [ ] 2025/04
-    - [ ] Support audio generation task
-    - [ ] 75Hz InspireAudio model for music and audio generation
-
 - [ ] TBD
-
     - [ ] 25Hz InspireMusic model
+    - [ ] Runtime SDK 
     - [ ] Support 48kHz stereo audio
     - [ ] Streaming inference mode support
     - [ ] Support more diverse instruction mode, multi-lingual instructions
     - [ ] InspireSong trained with more multi-lingual data
     - [ ] More...
+
+## Citation
+```bibtex
+@misc{zhang2025inspiremusic,
+      title={InspireMusic: Integrating Super Resolution and Large Language Model for High-Fidelity Long-Form Music Generation}, 
+      author={Chong Zhang and Yukun Ma and Qian Chen and Wen Wang and Shengkui Zhao and Zexu Pan and Hao Wang and Chongjia Ni and Trung Hieu Nguyen and Kun Zhou and Yidi Jiang and Chaohong Tan and Zhifu Gao and Zhihao Du and Bin Ma},
+      year={2025},
+      eprint={2503.00084},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD},
+      url={https://arxiv.org/abs/2503.00084}, 
+}
+```
 
 ---
 ### Friend Links

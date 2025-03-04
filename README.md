@@ -440,7 +440,7 @@ For normal mode, we recommend using hardware with at least 24GB of GPU memory fo
 
 ## Citation
 ```bibtex
-@misc{zhang2025inspiremusic,
+@misc{InspireMusic2025,
       title={InspireMusic: Integrating Super Resolution and Large Language Model for High-Fidelity Long-Form Music Generation}, 
       author={Chong Zhang and Yukun Ma and Qian Chen and Wen Wang and Shengkui Zhao and Zexu Pan and Hao Wang and Chongjia Ni and Trung Hieu Nguyen and Kun Zhou and Yidi Jiang and Chaohong Tan and Zhifu Gao and Zhihao Du and Bin Ma},
       year={2025},

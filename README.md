@@ -466,7 +466,7 @@ Checkout some awesome Github repositories from Tongyi Lab, Alibaba Group.
 
 [1] Shengpeng Ji, Ziyue Jiang, Wen Wang, Yifu Chen, Minghui Fang, Jialong Zuo, Qian Yang, Xize Cheng, Zehan Wang, Ruiqi Li, Ziang Zhang, Xiaoda Yang, Rongjie Huang, Yidi Jiang, Qian Chen, Siqi Zheng, Wen Wang, Zhou Zhao, WavTokenizer: an Efficient Acoustic Discrete Codec Tokenizer for Audio Language Modeling, The Thirteenth International Conference on Learning Representations, 2025.
 
-[2] Tongyi Lab, Qwen2.5 Technical Report, arXiv preprint arXiv:2412.15115, 2025.
+[2] Qwen: An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin Yang, Jiaxi Yang, Jingren Zhou, Junyang Lin, Kai Dang, Keming Lu, Keqin Bao, Kexin Yang, Le Yu, Mei Li, Mingfeng Xue, Pei Zhang, Qin Zhu, Rui Men, Runji Lin, Tianhao Li, Tianyi Tang, Tingyu Xia, Xingzhang Ren, Xuancheng Ren, Yang Fan, Yang Su, Yichang Zhang, Yu Wan, Yuqiong Liu, Zeyu Cui, Zhenru Zhang, Zihan Qiu, Qwen2.5 Technical Report, arXiv preprint arXiv:2412.15115, 2025.
 
 [3] Yang, Dongchao, Songxiang Liu, Rongjie Huang, Jinchuan Tian, Chao Weng, and Yuexian Zou, Hifi-codec: Group-residual vector quantization for high fidelity audio codec, arXiv preprint arXiv:2305.02765, 2023.
 

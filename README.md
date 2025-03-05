@@ -1,16 +1,7 @@
-[//]: # (# InspireMusic)
 <p align="center">
  <a href="https://github.com/FunAudioLLM/InspireMusic" target="_blank">
         <img alt="logo" src="./asset/logo.png" width="100%"></a>
 </p>
-
-[//]: # (<p align="center">)
-
-[//]: # ( <a href="https://github.com/FunAudioLLM/InspireMusic" target="_blank">)
-
-[//]: # (        <img alt="InspireMusic" src="https://svg-banners.vercel.app/api?type=origin&text1=Inspire%20Music🎶&text2=🤗%20A%20Fundamental%20Music%20Song%20Audio%20Generation%20Toolkit&width=800&height=210"></a>)
-
-[//]: # (</p>)
 
 <p align="center">
  <a href="https://funaudiollm.github.io/inspiremusic" target="_blank">
@@ -30,64 +21,29 @@
 <a href="http://arxiv.org/abs/2503.00084" target="_blank">
         <img alt="Paper" src="https://img.shields.io/badge/arXiv-Paper-green"></a>
 <a href="https://github.com/FunAudioLLM/InspireMusic" target="_blank">
-
-[//]: # (<a href="https://huggingface.co/FunAudioLLM/InspireMusic-Base" target="_blank">)
-
-[//]: # (        <img alt="Model" src="https://img.shields.io/badge/Model-InspireMusic?labelColor=%20%23FDA199&label=InspireMusic&color=orange"></a>)
-
-[//]: # (<a href="https://arxiv.org/abs/" target="_blank">)
-
-[//]: # (        <img alt="Paper" src="https://img.shields.io/badge/Paper-arXiv?labelColor=%20%23528bff&label=arXiv&color=%20%23155EEF"></a>)
-
-[//]: # (<a href="https://github.com/FunAudioLLM/InspireMusic" target="_blank">)
-
-[//]: # (        <img alt="Githube Star" src="https://img.shields.io/github/stars/FunAudioLLM/InspireMusic"></a>)
-
-[//]: # (<a href="https://github.com/FunAudioLLM/InspireMusic/blob/main/asset/QR.jpg" target="_blank">)
-
-[//]: # (        <img src="https://img.shields.io/badge/group%20chat-group?&labelColor=%20%235462eb&color=%20%235462eb" alt="chat on WeChat"></a>)
-[//]: # (<a href="https://discord.gg/nSPpRU7fRr" target="_blank">)
-
-[//]: # (        <img src="https://img.shields.io/badge/discord-chat?&labelColor=%20%235462eb&color=%20%235462eb" alt="chat on Discord"></a>)
-
-[//]: # (    <a href="https://github.com/FunAudioLLM/InspireMusic" target="_blank">)
-
-[//]: # (        <img alt="Static Badge" src="https://img.shields.io/badge/v0.1-version?logo=free&color=%20%23155EEF&label=version&labelColor=%20%23528bff"></a>)
-[//]: # (<a href="https://github.com/FunAudioLLM/InspireMusic/graphs/commit-activity" target="_blank">)
-
-[//]: # (<img alt="Commits last month" src="https://img.shields.io/github/commit-activity/m/FunAudioLLM/InspireMusic?labelColor=%20%2332b583&color=%20%2312b76a"></a>)
-
-[//]: # (    <a href="https://github.com/FunAudioLLM/InspireMusic" target="_blank">)
-
-[//]: # (        <img alt="Issues closed" src="https://img.shields.io/github/issues-search?query=repo%3AFunAudioLLM%2FInspireMusic%20is%3Aclosed&label=issues%20closed&labelColor=%20%237d89b0&color=%20%235d6b98"></a>)
-
-[//]: # (    <a href="https://github.com/FunAudioLLM/InspireMusic/discussions/" target="_blank">)
-
-[//]: # (        <img alt="Discussion posts" src="https://img.shields.io/github/discussions/FunAudioLLM/InspireMusic?labelColor=%20%239b8afb&color=%20%237a5af8"></a>)
 </p>
 
 InspireMusic is a fundamental AIGC toolkit and models designed for music, song, and audio generation using PyTorch. 
 
-![GitHub Repo stars](https://img.shields.io/github/stars/FunAudioLLM/InspireMusic) Please support our community project 💖 by starring it on GitHub 加⭐支持 🙏 
+![GitHub Repo stars](https://img.shields.io/github/stars/FunAudioLLM/InspireMusic) Please support our community project 💖 by starring it on GitHub 感谢大家加⭐支持🙏 
 
 [**Highlights**](#Highlights)
-| [**News**](https://github.com/FunAudioLLM/InspireMusic#News) 
+| [**News**](#News) 
 | [**Introduction**](#Introduction)
 | [**Installation**](#Installation)
-| [**Quick Start**](https://github.com/FunAudioLLM/InspireMusic#QuickStart)
-| [**Tutorial**](https://github.com/FunAudioLLM/InspireMusic#Tutorial)
-| [**Models**](https://github.com/FunAudioLLM/InspireMusic#Models)
-| [**Contact**](https://github.com/FunAudioLLM/InspireMusic#Contact)
-
+| [**Quick Start**](#QuickStart)
+| [**Tutorial**](#Tutorial)
+| [**Models**](#Models)
+| [**Contact**](#Contact)
 
 ---
 <a name="Highlights"></a>
 ## Highlights
 **InspireMusic** focuses on music generation, song generation and audio generation.
-- A unified framework for music/song/audio generation. Controllable with text prompts, music genres, music structures, etc.
-- Support music generation tasks with high audio quality, with available sampling rates of 24kHz, 48kHz. 
+- A unified framework for music, song, audio generation. Controllable with text prompts, music genres, music structures, etc.
+- Support music generation tasks with high audio quality, with available the sampling rates of 24kHz, 48kHz. 
 - Support long-form audio generation.
-- Convenient fine-tuning and inference. Support mixed precision training (BF16, FP16/FP32). Provide convenient fine-tuning and inference scripts and strategies, allowing users to easily fine-tune their music generation models.
+- Convenient fine-tuning and inference. Support mixed precision training (BF16, FP16, FP32). Provide convenient fine-tuning and inference scripts and strategies, allowing users to easily fine-tune their music generation models.
 
 <a name="News"></a>
 ## What's New 🔥
@@ -104,9 +60,9 @@ InspireMusic is a fundamental AIGC toolkit and models designed for music, song, 
 > This repo contains the algorithm infrastructure and some simple examples. Currently only support English text prompts.
 
 > [!Tip]
-> To explore the performance, please refer to [InspireMusic Demo Page](https://funaudiollm.github.io/inspiremusic). We will open-source better & larger models soon.
+> To experience the performance, please refer to [InspireMusic Demo Page](https://funaudiollm.github.io/inspiremusic). We will open-source better models soon.
 
-InspireMusic is a unified music, song and audio generation framework through the audio tokenization and detokenization process integrated with a large autoregressive transformer. The original motive of this toolkit is to empower the common users to innovate soundscapes and enhance euphony in research through music, song, and audio crafting. The toolkit provides both inference and training code for AI generative models that create high-quality music. Featuring a unified framework, InspireMusic incorporates autoregressive Transformer and super-resolution flow-matching modeling, allowing for the controllable generation of music, songs, and audio with both textual and structural music conditioning, as well as neural audio tokenizers. Currently, the toolkit supports text-to-music generation and plans to expand its capabilities to include text-to-song and text-to-audio generation in the future.
+InspireMusic is a unified music, song and audio generation framework through the audio tokenization and detokenization process integrated with a large autoregressive transformer. The original motive of this toolkit is to empower the common users to innovate soundscapes and enhance euphony in research through music, song, and audio crafting. The toolkit provides both training and inference code for AI-based generative models that create high-quality music. Featuring a unified framework, InspireMusic incorporates audio tokenizers, autoregressive transformer and super-resolution flow-matching modeling, allowing for the controllable generation of music, songs, and audio with both textual and structural music conditioning, as well as neural audio tokenizers. Currently, the toolkit supports text-to-music generation and plans to expand its capabilities to include text-to-song and text-to-audio generation in the future.
 
 ## InspireMusic
 <p align="center">
@@ -117,13 +73,13 @@ InspireMusic is a unified music, song and audio generation framework through the
     </tr>
     <tr>
       <td style="text-align:center;">
-<b>Figure 1.</b> An overview of the InspireMusic framework. We introduce InspireMusic, a unified framework for music, song, and audio generation capable of producing high-quality 48kHz long-form audio. InspireMusic consists of three key components:
+<b>Figure 1.</b> An overview of the InspireMusic framework. We introduce InspireMusic, a unified framework for music, song, audio generation capable of producing high-quality long-form audio. InspireMusic consists of three key components:
 
 - **Audio Tokenizers**:
 Convert the raw audio waveform into discrete audio tokens that can be efficiently processed and trained by the autoregressive transformer model. Audio waveform of lower sampling rate has converted to discrete tokens via a high bitrate compression audio tokenizer[<sup>[1]</sup>](https://openreview.net/forum?id=yBlVlS2Fd9) . 
 
 - **Autoregressive Transformer**:
-Autoregressive transformer model is based on Qwen2.5[<sup>[2]</sup>](https://arxiv.org/abs/2412.15115)  as the backbone model and is trained using a next-token prediction approach on both text and audio tokens, enabling it to generate coherent and contextually relevant token sequences. The audio and text tokens are the inputs of an autoregressive model with the next token prediction to generate tokens.
+Autoregressive transformer model is based on Qwen2.5[<sup>[2]</sup>](https://arxiv.org/abs/2412.15115) as the backbone model and is trained using a next-token prediction approach on both text and audio tokens, enabling it to generate coherent and contextually relevant token sequences. The audio and text tokens are the inputs of an autoregressive model with the next token prediction to generate tokens.
 
 - **Super-Resolution Flow-Matching** Model:
 An ODE-based flow matching model, specifically a super-resolution flow matching (SRFM) model, maps the generated tokens to latent features with high-resolution fine-grained acoustic details[<sup>[3]</sup>](https://arxiv.org/abs/2305.02765) obtained from a higher sampling rate of audio to ensure the acoustic information flow connected with high fidelity through models. A vocoder then generates the final audio waveform from these enhanced latent features. 
@@ -466,7 +422,6 @@ Checkout some awesome Github repositories from Tongyi Lab, Alibaba Group.
 
 <a name="Contact"></a>
 ## Community & Discussion
-* Please support our community project 🌟 by starring it on GitHub 🙏
 * Welcome to join our DingTalk and WeChat groups to share and discuss algorithms, technology, and user experience feedback. You may scan the following QR codes to join our official chat groups accordingly. 
 
 <p align="center">
@@ -495,7 +450,7 @@ Checkout some awesome Github repositories from Tongyi Lab, Alibaba Group.
 </p>
 
 * [Github Discussion](https://github.com/FunAudioLLM/InspireMusic/discussions). Best for sharing feedback and asking questions.
-* [GitHub Issues](https://github.com/FunAudioLLM/InspireMusic/issues). Best for bugs you encounter using InspireMusic, and feature proposals.
+* [GitHub Issues](https://github.com/FunAudioLLM/InspireMusic/issues). Best for bugs you encounter using InspireMusic and feature proposals.
 
 ## Acknowledge
 
@@ -511,7 +466,7 @@ Checkout some awesome Github repositories from Tongyi Lab, Alibaba Group.
 
 [1] Shengpeng Ji, Ziyue Jiang, Wen Wang, Yifu Chen, Minghui Fang, Jialong Zuo, Qian Yang, Xize Cheng, Zehan Wang, Ruiqi Li, Ziang Zhang, Xiaoda Yang, Rongjie Huang, Yidi Jiang, Qian Chen, Siqi Zheng, Wen Wang, Zhou Zhao, WavTokenizer: an Efficient Acoustic Discrete Codec Tokenizer for Audio Language Modeling, The Thirteenth International Conference on Learning Representations, 2025.
 
-[2] Qwen team, Qwen2.5 Technical Report, arXiv preprint arXiv:2412.15115, 2025.
+[2] Tongyi Lab, Qwen2.5 Technical Report, arXiv preprint arXiv:2412.15115, 2025.
 
 [3] Yang, Dongchao, Songxiang Liu, Rongjie Huang, Jinchuan Tian, Chao Weng, and Yuexian Zou, Hifi-codec: Group-residual vector quantization for high fidelity audio codec, arXiv preprint arXiv:2305.02765, 2023.
 

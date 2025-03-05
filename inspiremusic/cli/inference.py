@@ -49,7 +49,9 @@ class InspireMusicUnified:
                  fp16: bool = True,
                  gpu: int = 0,
                  result_dir: str = None,
-                 hub="modelscope"):
+                 hub="modelscope",
+                 repo_url=None,
+                 token=None):
         os.environ['CUDA_VISIBLE_DEVICES'] = str(gpu)
 
         # Set model_dir or default to downloading if it doesn't exist
@@ -63,6 +65,11 @@ class InspireMusicUnified:
                     snapshot_download(f"iic/InspireMusic", local_dir=model_dir)
                 else:
                     snapshot_download(f"iic/{model_name}", local_dir=model_dir)
+            elif hub == "huggingface":
+                from huggingface_hub import snapshot_download
+                snapshot_download(repo_id=f"FunAudioLLM/{model_name}", local_dir=model_dir)
+            else:
+                download_model(repo_url, model_dir, token)
 
         self.model_dir = model_dir
 

@@ -1,5 +1,27 @@
 import os
 import sys
+import subprocess
+
+def download_model(repo_url: str, output_dir: str = None, token: str = None):
+    try:
+        if token:
+            repo_url = repo_url.replace("https://", f"https://USER:{token}@")
+        else:
+            repo_url = f"https://www.modelscope.cn/models/iic/{repo_url}"
+
+        cmd = ["git", "clone", repo_url]
+        if output_dir:
+            cmd.append(output_dir)
+
+        result = subprocess.run(
+            cmd,
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        print("Success:", result.stdout)
+    except subprocess.CalledProcessError as e:
+        print("Error:", e.stderr)
 
 def align_trans_scp_file(trans, scp):
     trans_dict = {}
@@ -15,8 +37,3 @@ def align_trans_scp_file(trans, scp):
     with open("text", "w") as f:
         for k, v in scp_dict.items():
             f.write("%s\t%s\n"%(k,trans_dict[k]))
-
-if __name__ == '__main__':
-    trans = sys.argv[1]
-    scp = sys.argv[2]
-    align_trans_scp_file(trans, scp)

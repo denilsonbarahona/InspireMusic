@@ -67,7 +67,7 @@ git submodule update --init --recursive
 ```
 
 ### Install from Source
-InspireMusic requires Python 3.8, PyTorch 2.0.1, flash attention 2.6.2/2.6.3. For GPU servers with CUDA 11.x or above, you can install the dependencies with the following commands:
+InspireMusic requires Python>=3.8, PyTorch>=2.0.1, flash attention==2.6.2/2.6.3, CUDA>=11.2. You can install the dependencies with the following commands:
 
 - Install Conda: please see https://docs.conda.io/en/latest/miniconda.html
 - Create Conda env:

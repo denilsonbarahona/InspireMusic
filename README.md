@@ -106,7 +106,7 @@ InspireMusic is a fundamental AIGC toolkit and models designed for music, song, 
 > [!Tip]
 > To explore the performance, please refer to [InspireMusic Demo Page](https://funaudiollm.github.io/inspiremusic). We will open-source better & larger models soon.
 
-InspireMusic is a unified music, song and audio generation framework through the audio tokenization and detokenization process integrated with a large autoregressive transformer. The original motive of this toolkit is to empower the common users to innovate soundscapes and enhance euphony in research through music, song, and audio crafting. The toolkit provides both inference and training code for AI generative models that create high-quality music. Featuring a unified framework, InspireMusic incorporates autoregressive Transformer and conditional flow-matching modeling (CFM), allowing for the controllable generation of music, songs, and audio with both textual and structural music conditioning, as well as neural audio tokenizers. Currently, the toolkit supports text-to-music generation and plans to expand its capabilities to include text-to-song and text-to-audio generation in the future.
+InspireMusic is a unified music, song and audio generation framework through the audio tokenization and detokenization process integrated with a large autoregressive transformer. The original motive of this toolkit is to empower the common users to innovate soundscapes and enhance euphony in research through music, song, and audio crafting. The toolkit provides both inference and training code for AI generative models that create high-quality music. Featuring a unified framework, InspireMusic incorporates autoregressive Transformer and super-resolution flow-matching modeling, allowing for the controllable generation of music, songs, and audio with both textual and structural music conditioning, as well as neural audio tokenizers. Currently, the toolkit supports text-to-music generation and plans to expand its capabilities to include text-to-song and text-to-audio generation in the future.
 
 ## InspireMusic
 <p align="center">
@@ -119,14 +119,14 @@ InspireMusic is a unified music, song and audio generation framework through the
       <td style="text-align:center;">
 <b>Figure 1.</b> An overview of the InspireMusic framework. We introduce InspireMusic, a unified framework for music, song, and audio generation capable of producing high-quality 48kHz long-form audio. InspireMusic consists of three key components:
 
-- **Dual Audio Tokenizers**:
-The framework first converts raw audio waveforms into discrete tokens that are efficiently processed by the autoregressive model. We employ two tokenizers: WavTokenizer converts 24kHz audio into 75Hz discrete tokens, while Hifi-Codec transforms 48kHz audio into 150Hz latent features suited for our flow matching model.
+- **Audio Tokenizers**:
+Convert the raw audio waveform into discrete audio tokens that can be efficiently processed and trained by the autoregressive transformer model. Audio waveform of lower sampling rate has converted to discrete tokens via a high bitrate compression audio tokenizer[<sup>[1]</sup>](https://openreview.net/forum?id=yBlVlS2Fd9) . 
 
 - **Autoregressive Transformer**:
-This component is trained using a next-token prediction approach on both text and audio tokens, enabling it to generate coherent and contextually relevant audio sequences.
+Autoregressive transformer model is based on Qwen2.5[<sup>[2]</sup>](https://arxiv.org/abs/2412.15115)  as the backbone model and is trained using a next-token prediction approach on both text and audio tokens, enabling it to generate coherent and contextually relevant token sequences. The audio and text tokens are the inputs of an autoregressive model with the next token prediction to generate tokens.
 
-- **Super-Resolution Flow Matching** Model:
-An ODE-based diffusion model, specifically a super-resolution flow matching (SRFM) model, maps the lower-resolution audio tokens to latent features with a higher sampling rate. A vocoder then generates the final audio waveform from these enhanced latent features.
+- **Super-Resolution Flow-Matching** Model:
+An ODE-based flow matching model, specifically a super-resolution flow matching (SRFM) model, maps the generated tokens to latent features with high-resolution fine-grained acoustic details[<sup>[3]</sup>](https://arxiv.org/abs/2305.02765) obtained from a higher sampling rate of audio to ensure the acoustic information flow connected with high fidelity through models. A vocoder then generates the final audio waveform from these enhanced latent features. 
 
 InspireMusic supports a range of tasks including text-to-music, music continuation, music reconstruction, and music super-resolution.
       </td>
@@ -303,8 +303,8 @@ The table below presents the links to the ModelScope and Huggingface model hub. 
 | InspireSong-1.5B                      | [![model](https://img.shields.io/badge/ModelScope-Model-lightgrey.svg)]() [![model](https://img.shields.io/badge/HuggingFace-Model-lightgrey.svg)]()                                                                                                                                                                                          | Pre-trained Song Generation 1.5B Model, 48kHz stereo                                               |
 | InspireAudio-1.5B                     | [![model](https://img.shields.io/badge/ModelScope-Model-lightgrey.svg)]() [![model](https://img.shields.io/badge/HuggingFace-Model-lightgrey.svg)]()                                                                                                                                                                                          | Pre-trained Audio Generation 1.5B Model, 48kHz stereo                                              |
 | Wavtokenizer[<sup>[1]</sup>](https://openreview.net/forum?id=yBlVlS2Fd9) (75Hz) | [![model](https://img.shields.io/badge/ModelScope-Model-green.svg)](https://modelscope.cn/models/iic/InspireMusic-1.5B-Long/file/view/master?fileName=wavtokenizer%252Fmodel.pt) [![model](https://img.shields.io/badge/HuggingFace-Model-green.svg)](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long/tree/main/wavtokenizer)       | An extreme low bitrate audio tokenizer for music with one codebook at 24kHz audio.                 |
-| Music_tokenizer (75Hz)                | [![model](https://img.shields.io/badge/ModelScope-Model-green.svg)](https://modelscope.cn/models/iic/InspireMusic-1.5B-24kHz/file/view/master?fileName=music_tokenizer%252Fmodel.pt) [![model](https://img.shields.io/badge/HuggingFace-Model-green.svg)](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz/tree/main/music_tokenizer) | A music tokenizer based on HifiCodec<sup>[2]</sup> at 24kHz audio.                                 |
-| Music_tokenizer (150Hz)               | [![model](https://img.shields.io/badge/ModelScope-Model-green.svg)](https://modelscope.cn/models/iic/InspireMusic-1.5B-Long/file/view/master?fileName=music_tokenizer%252Fmodel.pt) [![model](https://img.shields.io/badge/HuggingFace-Model-green.svg)](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long/tree/main/music_tokenizer) | A music tokenizer based on HifiCodec at 48kHz audio.                                               |
+| Music_tokenizer (75Hz)                | [![model](https://img.shields.io/badge/ModelScope-Model-green.svg)](https://modelscope.cn/models/iic/InspireMusic-1.5B-24kHz/file/view/master?fileName=music_tokenizer%252Fmodel.pt) [![model](https://img.shields.io/badge/HuggingFace-Model-green.svg)](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz/tree/main/music_tokenizer) | A music tokenizer based on HifiCodec<sup>[3]</sup> at 24kHz audio.                                 |
+| Music_tokenizer (150Hz)               | [![model](https://img.shields.io/badge/ModelScope-Model-green.svg)](https://modelscope.cn/models/iic/InspireMusic-1.5B-Long/file/view/master?fileName=music_tokenizer%252Fmodel.pt) [![model](https://img.shields.io/badge/HuggingFace-Model-green.svg)](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long/tree/main/music_tokenizer) | A music tokenizer based on HifiCodec<sup>[3]</sup> at 48kHz audio.                                               |
 
 Our models have been trained within a limited budget, and there is still significant potential for performance improvement. We are actively working on enhancing the model's performance.
 
@@ -499,7 +499,7 @@ Checkout some awesome Github repositories from Tongyi Lab, Alibaba Group.
 
 ## Acknowledge
 
-1. We borrowed a lot of code from [CosyVoice<sup>[3]</sup>](https://github.com/FunAudioLLM/CosyVoice).
+1. We borrowed a lot of code from [CosyVoice<sup>[4]</sup>](https://github.com/FunAudioLLM/CosyVoice).
 3. We borrowed a lot of code from [WavTokenizer](https://github.com/jishengpeng/WavTokenizer).
 4. We borrowed a lot of code from [AcademiCodec](https://github.com/yangdongchao/AcademiCodec).
 5. We borrowed a lot of code from [FunASR](https://github.com/modelscope/FunASR).
@@ -511,9 +511,11 @@ Checkout some awesome Github repositories from Tongyi Lab, Alibaba Group.
 
 [1] Shengpeng Ji, Ziyue Jiang, Wen Wang, Yifu Chen, Minghui Fang, Jialong Zuo, Qian Yang, Xize Cheng, Zehan Wang, Ruiqi Li, Ziang Zhang, Xiaoda Yang, Rongjie Huang, Yidi Jiang, Qian Chen, Siqi Zheng, Wen Wang, Zhou Zhao, WavTokenizer: an Efficient Acoustic Discrete Codec Tokenizer for Audio Language Modeling, The Thirteenth International Conference on Learning Representations, 2025.
 
-[2] Yang, Dongchao, Songxiang Liu, Rongjie Huang, Jinchuan Tian, Chao Weng, and Yuexian Zou, Hifi-codec: Group-residual vector quantization for high fidelity audio codec, arXiv preprint arXiv:2305.02765, 2023.
+[2] Qwen team, Qwen2.5 Technical Report, arXiv preprint arXiv:2412.15115, 2025.
 
-[3] Du, Zhihao, Qian Chen, Shiliang Zhang, Kai Hu, Heng Lu, Yexin Yang, Hangrui Hu et al. Cosyvoice: A scalable multilingual zero-shot text-to-speech synthesizer based on supervised semantic tokens. arXiv preprint arXiv:2407.05407, 2024. 
+[3] Yang, Dongchao, Songxiang Liu, Rongjie Huang, Jinchuan Tian, Chao Weng, and Yuexian Zou, Hifi-codec: Group-residual vector quantization for high fidelity audio codec, arXiv preprint arXiv:2305.02765, 2023.
+
+[4] Du, Zhihao, Qian Chen, Shiliang Zhang, Kai Hu, Heng Lu, Yexin Yang, Hangrui Hu et al. Cosyvoice: A scalable multilingual zero-shot text-to-speech synthesizer based on supervised semantic tokens. arXiv preprint arXiv:2407.05407, 2024. 
 
 ## Disclaimer
 The content provided above is for academic purposes only and is intended to demonstrate technical capabilities. Some examples are sourced from the internet. If any content infringes on your rights, please contact us to request its removal.

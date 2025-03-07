@@ -16,16 +16,8 @@
 """Unility functions for Transformer."""
 
 from typing import List
-
 import torch
 IGNORE_ID = -1
-
-MUSIC_STRUCTURE_LABELS = ["intro", "verse1", "chorus", "verse2", "outro"]
-
-DTYPES = {
-    "bf16": torch.bfloat16,
-    "fp16": torch.float16,
-}
 
 def pad_list(xs: List[torch.Tensor], pad_value: int):
     """Perform padding for the list of tensors.
@@ -97,16 +89,61 @@ def th_accuracy(pad_outputs: torch.Tensor, pad_targets: torch.Tensor,
     denominator = torch.sum(mask)
     return (numerator / denominator).detach()
 
-
 def get_padding(kernel_size, dilation=1):
     return int((kernel_size * dilation - dilation) / 2)
-
 
 def init_weights(m, mean=0.0, std=0.01):
     classname = m.__class__.__name__
     if classname.find("Conv") != -1:
         m.weight.data.normal_(mean, std)
 
+def keep_rhythm(next_token, current_time_signature):
+    allowed_durations = get_allowed_durations(current_time_signature)
+    if next_token not in allowed_durations:
+        next_token = random.choice(allowed_durations)
+    return next_token
+
+def keep_harmony(next_token, current_chord):
+    allowed_notes = get_allowed_notes(current_chord)  # Define allowed notes for the chord
+    if next_token not in allowed_notes:
+        next_token = random.choice(allowed_notes)  # Replace with a valid note
+    return next_token
+
+def relieve_repetition(weighted_scores, recent_tokens, repetition_penalty=1.2):
+    for token in recent_tokens:
+        if weighted_scores[token] > 0:
+            weighted_scores[token] /= repetition_penalty
+    return weighted_scores
+
+def top_p_sampling_with_constraints(weighted_scores, decoded_tokens, top_p=0.85, temperature=1.1, current_chord=None, current_time_signature=None, recent_tokens=None):
+    # Apply temperature scaling
+    weighted_scores = weighted_scores ** (1 / temperature)
+    weighted_scores /= weighted_scores.sum()
+
+    if recent_tokens:
+        weighted_scores = relieve_repetition(weighted_scores, recent_tokens)
+
+    # Sort weighted scores in descending order
+    sorted_weighted_scores, _ = torch.sort(weighted_scores, descending=True)
+
+    # Compute cumulative weighted scores
+    cumulative_weighted_scores = torch.cumsum(sorted_weighted_scores, dim=0)
+
+    # Find the threthold index of top-p
+    cutoff_index = torch.where(cumulative_weighted_scores >= top_p)[0][0]
+    selected_weighted_scores = sorted_weighted_scores[:cutoff_index + 1]
+
+    # Apply domain-specific constraints
+    if current_chord:
+        selected_weighted_scores = keep_harmony(selected_weighted_scores, current_chord)
+    if current_time_signature:
+        selected_weighted_scores = keep_rhythm(selected_weighted_scores, current_time_signature)
+
+    # Normalize selected probabilities
+    selected_weighted_scores /= selected_weighted_scores.sum()
+
+    # Sample top-p tokens from the distribution
+    return random_sampling(selected_weighted_scores, decoded_tokens)
 def topk_sampling(weighted_scores, decoded_tokens, top_k=25):
     zeros = weighted_scores.new_ones(weighted_scores.shape) * float('-inf')
     values,indices =  torch.topk(weighted_scores,top_k)

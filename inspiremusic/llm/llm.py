@@ -51,12 +51,21 @@ class LLM(torch.nn.Module):
             lsm_weight: float = 0.0,
             frozen_input_embed: bool = False,
             dtype: str = "fp16",
+            text_token_size: int = 151643,
             **kwargs,
     ):
         super().__init__()
-        self.dtype = DTYPES.get(dtype, torch.float32)
+
+        if dtype == "fp16":
+            self.dtype = torch.float16
+        elif dtype == "bf16":
+            self.dtype = torch.bfloat16
+        else:
+            self.dtype = torch.float32
+
         self.llm_input_size = llm_input_size
         self.audio_token_size = audio_token_size
+        self.speech_token_size = audio_token_size
         # 1. build text token inputs related modules
 
         if llm is None:
@@ -117,27 +126,8 @@ class LLM(torch.nn.Module):
 
         encoder_name = encoder_conf.pop("name", "transformer")
         model = None
-        if encoder_name == "transformer":
-            from inspiremusic.transformer.conformer_encoder import ConformerEncoder
-            model = ConformerEncoder(
-                    **encoder_conf,
-                    input_size=self.input_size,
-                    use_cnn_module=False,
-                    macaron_style=False,
-            )
-        elif encoder_name == "conformer":
-            from inspiremusic.transformer.conformer_encoder import ConformerEncoder
-            model = ConformerEncoder(
-                    **encoder_conf,
-                    input_size=self.input_size,
-            )
-        elif encoder_name == "llama_encoder":
-            from inspiremusic.transformer.llama_encoder import LlamaEncoder
-            model = LlamaEncoder(
-                    **encoder_conf,
-                    input_size=self.input_size,
-            )
-        elif "qwen" in encoder_name:
+
+        if "qwen" in encoder_name:
             from inspiremusic.transformer.qwen_encoder import QwenEncoder
             model = QwenEncoder(
                     **encoder_conf,
@@ -233,8 +223,7 @@ class LLM(torch.nn.Module):
             time_end_embed = self.time_embedding(time_end).to(text_token.dtype)
             chorus_embed = self.chorus_embedding(chorus)
 
-            lm_target = [torch.tensor(
-                [IGNORE_ID] * (4 + text_token_len[i]) + audio_token[i,:audio_token_len[i]].tolist() + [self.audio_token_size]) for i in range(text_token.size(0))]
+            lm_target = [torch.tensor([IGNORE_ID] * (4 + text_token_len[i]) + audio_token[i,:audio_token_len[i]].tolist() + [self.audio_token_size]) for i in range(text_token.size(0))]
 
         lm_target = pad_sequence(lm_target, batch_first=True, padding_value=IGNORE_ID).to(device)
 
@@ -246,16 +235,7 @@ class LLM(torch.nn.Module):
         audio_token = self.speech_embedding(audio_token)
 
         # 5. unpad and pad
-        lm_input, lm_input_len = self.pad_unpad_sequence(sos_eos_emb,
-                                                         [time_start_embed,
-                                                          time_end_embed,
-                                                          chorus_embed],
-                                                         text_token,
-                                                         text_token_len,
-                                                         task_id_emb,
-                                                         audio_token,
-                                                         audio_token_len,
-                                                         seg_len)
+        lm_input, lm_input_len = self.pad_unpad_sequence(sos_eos_emb, [time_start_embed, time_end_embed, chorus_embed], text_token, text_token_len, task_id_emb, audio_token, audio_token_len, seg_len)
         # 6. run lm forward
         lm_output, lm_output_mask = self.llm(lm_input.to(self.dtype), lm_input_len.to(device))
         logits = self.llm_decoder(lm_output)
@@ -313,8 +293,7 @@ class LLM(torch.nn.Module):
                 time_end_embed = self.time_embedding(time_end).reshape(1, 1, -1)  # .half()
                 chorus_embed = self.chorus_embedding(chorus).reshape(1, 1, -1)  # .half()
             else:
-                time_start_embed = self.time_embedding(
-                    time_start.view(-1)).reshape(1, chorus.size(1), -1)  # .half()
+                time_start_embed = self.time_embedding(time_start.view(-1)).reshape(1, chorus.size(1), -1)  # .half()
                 time_end_embed = self.time_embedding(time_end.view(-1)).reshape(1, chorus.size(1), -1)  # .half()
                 chorus_embed = self.chorus_embedding(chorus)  # .half()
 
@@ -328,10 +307,10 @@ class LLM(torch.nn.Module):
         else:
             audio_token_emb = torch.zeros(1, 0, self.llm_input_size, dtype=text.dtype).to(device)
 
-        if prompt_audio_token_len:
-            prompt_audio_token_emb = self.speech_embedding(prompt_audio_token)
-        else:
-            prompt_audio_token_emb = torch.zeros(1, 0, self.llm_input_size, dtype=text.dtype).to(device)
+        #if prompt_audio_token_len:
+        #    prompt_audio_token_emb = self.speech_embedding(prompt_audio_token)
+        #else:
+        #    prompt_audio_token_emb = torch.zeros(1, 0, self.llm_input_size, dtype=text.dtype).to(device)
         # Check if removing prompt audio token will fail decoding.
 
         if task == "continuation":
@@ -340,24 +319,13 @@ class LLM(torch.nn.Module):
                      chorus_embed, text, task_id_emb, audio_token_emb], dim=1)
 
             if infer_cfg:
-                audio_cfg = self.speech_embedding(
-                    audio_token.new_zeros(audio_token.shape))
-                lm_cf_input = torch.concat(
-                        [sos_eos_emb, torch.rand_like(time_start_embed),
-                         torch.rand_like(time_end_embed),
-                         torch.rand_like(chorus_embed), text_cfg, task_id_emb,
-                         audio_cfg], dim=1)
+                audio_cfg = self.speech_embedding(audio_token.new_zeros(audio_token.shape))
+                lm_cf_input = torch.concat([sos_eos_emb, torch.rand_like(time_start_embed), torch.rand_like(time_end_embed), torch.rand_like(chorus_embed), text_cfg, task_id_emb, audio_cfg], dim=1)
                 lm_input = torch.cat([lm_input, lm_cf_input], 0)
         else:
-            lm_input = torch.concat(
-                    [sos_eos_emb, time_start_embed, time_end_embed,
-                     chorus_embed, text, task_id_emb], dim=1)
+            lm_input = torch.concat([sos_eos_emb, time_start_embed, time_end_embed, chorus_embed, text, task_id_emb], dim=1)
             if infer_cfg:
-                lm_cf_input = torch.concat(
-                        [sos_eos_emb, torch.rand_like(time_start_embed),
-                         torch.rand_like(time_end_embed),
-                         torch.rand_like(chorus_embed), text_cfg, task_id_emb],
-                        dim=1)
+                lm_cf_input = torch.concat([sos_eos_emb, torch.rand_like(time_start_embed), torch.rand_like(time_end_embed), torch.rand_like(chorus_embed), text_cfg, task_id_emb], dim=1)
                 lm_input = torch.cat([lm_input, lm_cf_input], 0)
 
         # 4. cal min/max_length
@@ -388,6 +356,9 @@ class LLM(torch.nn.Module):
             top_ids = self.sampling_ids(logp, out_tokens, ignore_eos=i < min_len).item()
 
             if top_ids == self.audio_token_size:
+                break
+
+            if top_ids == self.speech_token_size:
                 break
 
             # # in stream mode, yield token one by one

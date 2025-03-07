@@ -28,7 +28,6 @@ from inspiremusic.cli.model import InspireMusicModel
 from inspiremusic.dataset.dataset import Dataset
 import time
 from inspiremusic.utils.audio_utils import trim_audio, fade_out, process_audio
-from inspiremusic.utils.common import MUSIC_STRUCTURE_LABELS
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -55,7 +54,7 @@ def get_args():
                         help='sampling rate of input audio')
     parser.add_argument('--output_sample_rate', type=int, default=48000, required=False, choices=[24000, 48000],
                         help='sampling rate of generated output audio')
-    parser.add_argument('--min_generate_audio_seconds', type=float, default=10.0, required=False,
+    parser.add_argument('--min_generate_audio_seconds', type=float, default=0.0, required=False,
                         help='the minimum generated audio length in seconds')
     parser.add_argument('--max_generate_audio_seconds', type=float, default=30.0, required=False,
                         help='the maximum generated audio length in seconds')
@@ -72,9 +71,9 @@ def get_args():
     print(args)
     return args
 
-
 def main():
 	args = get_args()
+	chorus_labels = ["intro", "verse1", "chorus", "verse2", "outro"]
 	logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s')
 	os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
 
@@ -155,7 +154,7 @@ def main():
 			time_end = batch["time_end"].to(device)
 			chorus = batch["chorus"].to(torch.int)
 
-			text_prompt = f"<|{batch['time_start'].numpy()[0]}|><|{MUSIC_STRUCTURE_LABELS[chorus.numpy()[0]]}|><|{batch['text'][0]}|><|{batch['time_end'].numpy()[0]}|>"
+			text_prompt = f"<|{batch['time_start'].numpy()[0]}|><|{chorus_labels[chorus.numpy()[0]]}|><|{batch['text'][0]}|><|{batch['time_end'].numpy()[0]}|>"
 			chorus = chorus.to(device)
 
 			if batch["acoustic_token"] is None:

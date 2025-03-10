@@ -3,7 +3,7 @@ export PYTHONIOENCODING=UTF-8
 export PYTHONPATH=../../:../../third_party/Matcha-TTS:$PYTHONPATH
 
 #!/bin/bash
-export MAIN_ROOT=`realpath ${PWD}/../../`
+export MAIN_ROOT=`realpath ${PWD}/../../../`
 
 export PYTHONPATH=${MAIN_ROOT}:${PYTHONPATH}
 export BIN_DIR=${MAIN_ROOT}/inspiremusic

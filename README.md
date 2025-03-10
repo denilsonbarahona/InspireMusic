@@ -63,7 +63,9 @@ Figure 1: An overview of the InspireMusic framework. We introduce InspireMusic, 
 git clone --recursive https://github.com/FunAudioLLM/InspireMusic.git
 # If you failed to clone submodule due to network failures, please run the following command until success
 cd InspireMusic
-git submodule update --init --recursive
+git submodule update --recursive
+# or you can download the third_party repo Matcha-TTS manually
+cd third_party && git clone https://github.com/shivammehta25/Matcha-TTS.git
 ```
 
 ### Install from Source

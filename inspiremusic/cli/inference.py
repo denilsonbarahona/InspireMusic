@@ -38,7 +38,7 @@ class InspireMusicUnified:
     def __init__(self,
                  model_name: str = "InspireMusic-1.5B-Long",
                  model_dir: str = None,
-                 min_generate_audio_seconds: float = 10.0,
+                 min_generate_audio_seconds: float = 0.0,
                  max_generate_audio_seconds: float = 30.0,
                  sample_rate: int = 24000,
                  output_sample_rate: int = 48000,
@@ -47,7 +47,7 @@ class InspireMusicUnified:
                  dtype: str = "fp16",
                  fast: bool = False,
                  fp16: bool = True,
-                 gpu: int = 0,
+                 gpu: int = 1,
                  result_dir: str = None,
                  hub="modelscope",
                  repo_url=None,
@@ -68,8 +68,6 @@ class InspireMusicUnified:
             elif hub == "huggingface":
                 from huggingface_hub import snapshot_download
                 snapshot_download(repo_id=f"FunAudioLLM/{model_name}", local_dir=model_dir)
-            else:
-                download_model(repo_url, model_dir, token)
 
         self.model_dir = model_dir
 
@@ -229,7 +227,7 @@ def get_args():
     parser.add_argument('-f', '--fast', type=bool, default=False, 
                         help='Enable fast inference mode (without flow matching)')
 
-    parser.add_argument('-g', '--gpu', type=int, default=0, 
+    parser.add_argument('-g', '--gpu', type=int, default=1,
                         help='GPU ID for this rank, -1 for CPU')
     
     parser.add_argument('--task', default='text-to-music', choices=['text-to-music', 'continuation', 'reconstruct', 'super_resolution'],

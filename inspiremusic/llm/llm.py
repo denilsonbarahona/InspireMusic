@@ -65,7 +65,6 @@ class LLM(torch.nn.Module):
 
         self.llm_input_size = llm_input_size
         self.audio_token_size = audio_token_size
-        self.speech_token_size = audio_token_size
         # 1. build text token inputs related modules
 
         if llm is None:
@@ -356,9 +355,6 @@ class LLM(torch.nn.Module):
             top_ids = self.sampling_ids(logp, out_tokens, ignore_eos=i < min_len).item()
 
             if top_ids == self.audio_token_size:
-                break
-
-            if top_ids == self.speech_token_size:
                 break
 
             # # in stream mode, yield token one by one

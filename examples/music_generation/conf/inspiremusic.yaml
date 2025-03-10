@@ -32,6 +32,7 @@ llm: !new:inspiremusic.llm.llm.LLM
         
     sampling: !name:inspiremusic.utils.common.topk_sampling
         top_k: 350
+
     train_cfg_ratio: 0.2
     infer_cfg_ratio: 3.0
 flow: !new:inspiremusic.flow.flow.MaskedDiff

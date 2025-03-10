@@ -17,7 +17,6 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from inspiremusic.utils.mask import make_pad_mask
 from inspiremusic.utils.hinter import hint_once
-from inspiremusic.utils.common import DTYPES
 
 class QwenEncoder(nn.Module):
     def __init__(
@@ -32,7 +31,14 @@ class QwenEncoder(nn.Module):
         super(QwenEncoder, self).__init__()
         self.input_size = input_size
         self.trainable = trainable
-        self.dtype = DTYPES.get(dtype, torch.float32)
+
+        if dtype == "fp16":
+            self.dtype = torch.float16
+        elif dtype == "bf16":
+            self.dtype = torch.bfloat16
+        else:
+            self.dtype = torch.float32
+
         self.model = AutoModelForCausalLM.from_pretrained(pretrain_path, device_map="auto", attn_implementation="flash_attention_2", torch_dtype=self.dtype)
         self._output_size = self.model.config.hidden_size
         self.do_fusion_emb = do_fusion_emb
@@ -96,7 +102,12 @@ class QwenEmbeddingEncoder(nn.Module):
     ):
         super(QwenEmbeddingEncoder, self).__init__()
         self.input_size = input_size
-        self.dtype = DTYPES.get(dtype, torch.float32)
+        if dtype == "fp16":
+            self.dtype = torch.float16
+        elif dtype == "bf16":
+            self.dtype = torch.bfloat16
+        else:
+            self.dtype = torch.float32
         from transformers import Qwen2ForCausalLM
         self.model = Qwen2ForCausalLM.from_pretrained(pretrain_path, device_map="auto", attn_implementation="flash_attention_2", torch_dtype=self.dtype)
         self._output_size = self.model.config.hidden_size
@@ -145,7 +156,12 @@ class QwenInputOnlyEncoder(nn.Module):
     ):
         super(QwenInputOnlyEncoder, self).__init__()
         self.input_size = input_size
-        self.dtype = DTYPES.get(dtype, torch.float32)
+        if dtype == "fp16":
+            self.dtype = torch.float16
+        elif dtype == "bf16":
+            self.dtype = torch.bfloat16
+        else:
+            self.dtype = torch.float32
         from transformers import Qwen2ForCausalLM
         model = Qwen2ForCausalLM.from_pretrained(pretrain_path, device_map="auto", attn_implementation="flash_attention_2", torch_dtype=self.dtype)
         self.embed = model.model.embed_tokens

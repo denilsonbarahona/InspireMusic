@@ -17,7 +17,7 @@ from torch import nn
 from torch.nn.utils.rnn import pad_sequence, unpad_sequence
 from inspiremusic.utils.common import IGNORE_ID
 from inspiremusic.transformer.label_smoothing_loss import LabelSmoothingLoss
-from inspiremusic.utils.common import th_accuracy, DTYPES
+from inspiremusic.utils.common import th_accuracy
 from torch import Tensor
 from math import log
 from einops import rearrange, reduce, repeat

@@ -16,7 +16,6 @@ import threading
 import time
 from contextlib import nullcontext
 import uuid
-from inspiremusic.utils.common import DTYPES
 from inspiremusic.music_tokenizer.vqvae import VQVAE
 from inspiremusic.wavtokenizer.decoder.pretrained import WavTokenizer
 from torch.cuda.amp import autocast
@@ -37,7 +36,14 @@ class InspireMusicModel:
                  fp16: bool = True,
                  ):
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.dtype = DTYPES.get(dtype, torch.float32)
+
+        if dtype == "fp16":
+            self.dtype = torch.float16
+        elif dtype == "bf16":
+            self.dtype = torch.bfloat16
+        else:
+            self.dtype = torch.float32
+
         self.llm = llm.to(self.dtype)
         self.flow = flow
         self.music_tokenizer = music_tokenizer

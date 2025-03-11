@@ -56,9 +56,12 @@ class InspireMusicUnified:
 
         # Set model_dir or default to downloading if it doesn't exist
         if model_dir is None:
-             model_dir = f"../../pretrained_models/{model_name}"
+            if sys.platform == "win32":
+                model_dir = f"..\..\pretrained_models\{model_name}"
+            else:
+                model_dir = f"../../pretrained_models/{model_name}"
 
-        if not os.path.isfile(f"{model_dir}/llm.pt"):
+        if not os.path.isfile(os.path.join(model_dir, "llm.pt")):
             if hub == "modelscope":
                 from modelscope import snapshot_download
                 if model_name == "InspireMusic-Base":
@@ -73,7 +76,7 @@ class InspireMusicUnified:
 
         self.sample_rate = sample_rate
         self.output_sample_rate = 24000 if fast else output_sample_rate
-        self.result_dir = result_dir or f"exp/{model_name}"
+        self.result_dir = result_dir or os.path.join("exp", model_name)
         os.makedirs(self.result_dir, exist_ok=True)
 
         self.min_generate_audio_seconds = min_generate_audio_seconds

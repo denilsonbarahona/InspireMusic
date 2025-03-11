@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import os
+import sys
 import time
 from tqdm import tqdm
 from hyperpyyaml import load_hyperpyyaml
@@ -26,8 +27,12 @@ class InspireMusic:
         instruct = True if '-Instruct' in model_dir else False
 
         if model_dir is None:
-             model_dir = f"../../pretrained_models/InspireMusic-1.5B-Long"
-        if not os.path.isfile(f"{model_dir}/llm.pt"):
+            if sys.platform == "win32":
+                model_dir = f"..\..\pretrained_models\{model_name}"
+            else:
+                model_dir = f"../../pretrained_models/{model_name}"
+
+        if not os.path.isfile(os.path.join(model_dir, "llm.pt")):
             model_name = model_dir.split("/")[-1]
             if hub == "modelscope":
                 from modelscope import snapshot_download
@@ -41,7 +46,7 @@ class InspireMusic:
             else:
                 download_model(repo_url, model_dir, token)
 
-        with open('{}/inspiremusic.yaml'.format(model_dir), 'r') as f:
+        with open(os.path.join(model_dir, 'inspiremusic.yaml'), 'r') as f:
             configs = load_hyperpyyaml(f)
 
         self.frontend = InspireMusicFrontEnd(configs,
@@ -57,10 +62,11 @@ class InspireMusic:
                                           configs['allowed_special'])
 
         self.model = InspireMusicModel(configs['llm'], configs['flow'], configs['hift'], configs['wavtokenizer'], dtype, fast, fp16)
-        self.model.load('{}/llm.pt'.format(model_dir),
-                        '{}/flow.pt'.format(model_dir),
-                        '{}/music_tokenizer/'.format(model_dir),
-                        '{}/wavtokenizer/model.pt'.format(model_dir))
+        self.model.load(os.path.join(model_dir, 'llm.pt'),
+                        os.path.join(model_dir, 'flow.pt'),
+                        os.path.join(model_dir, 'music_tokenizer'),
+                        os.path.join(model_dir, 'wavtokenizer', "model.pt"),
+                        )
         del configs
 
     @torch.inference_mode()

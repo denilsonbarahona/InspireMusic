@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import os
+import sys
 import numpy as np
 import threading
 import time
@@ -21,7 +23,6 @@ from inspiremusic.wavtokenizer.decoder.pretrained import WavTokenizer
 from torch.cuda.amp import autocast
 import logging
 import torch
-import os
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -81,19 +82,15 @@ class InspireMusicModel:
             self.flow.to(self.device).eval()
         if hift_model is not None:
             if ".pt" not in hift_model:
-                self.music_tokenizer = VQVAE( hift_model + '/config.json',
-                                    hift_model + '/model.pt', with_encoder=True)
+                self.music_tokenizer = VQVAE(os.path.join(hift_model, 'config.json'), os.path.join(hift_model, 'model.pt'), with_encoder=True)
             else:
-                self.music_tokenizer = VQVAE(os.path.dirname(hift_model) + '/config.json',
-                                    hift_model, with_encoder=True)             
+                self.music_tokenizer = VQVAE(os.path.join(os.path.dirname(hift_model), 'config.json'), hift_model, with_encoder=True)
             self.music_tokenizer.to(self.device).eval()
         if wavtokenizer_model is not None:
             if ".pt" not in wavtokenizer_model:
-                self.wavtokenizer = WavTokenizer.from_pretrained_feat( wavtokenizer_model + '/config.yaml',
-                                    wavtokenizer_model + '/model.pt')
+                self.wavtokenizer = WavTokenizer.from_pretrained_feat(os.path.join(wavtokenizer_model, 'config.yaml'), os.path.join(wavtokenizer_model, 'model.pt'))
             else:
-                self.wavtokenizer = WavTokenizer.from_pretrained_feat( os.path.dirname(wavtokenizer_model) + '/config.yaml',
-                                    wavtokenizer_model )
+                self.wavtokenizer = WavTokenizer.from_pretrained_feat(os.path.join(os.path.dirname(wavtokenizer_model), 'config.yaml'), wavtokenizer_model)
             self.wavtokenizer.to(self.device)
 
     def load_jit(self, llm_text_encoder_model, llm_llm_model, flow_encoder_model):

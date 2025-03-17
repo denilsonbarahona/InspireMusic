@@ -116,6 +116,16 @@ Run the following command to start the docker container in interactive mode.
 docker run -ti --gpus all -v .:/workspace/InspireMusic inspiremusic
 ```
 
+### Use Docker Compose
+Run the following command to build a docker compose environment and docker image from the docker-compose.yml file.
+```shell
+docker compose up -d --build
+```
+Run the following command to attach to the docker container in interactive mode.
+```shell
+docker exec -ti inspire-music bash
+```
+
 <a name="quick-start"></a>
 ### Quick Start
 Here is a quick example inference script for music generation. 

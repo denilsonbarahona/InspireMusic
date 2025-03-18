@@ -36,7 +36,16 @@ class InspireMusicModel:
                  fast: bool = False,
                  fp16: bool = True,
                  ):
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+        if torch.cuda.is_available():
+            if torch.cuda.is_available():
+                self.device = torch.device('cuda')
+            elif torch.backends.mps.is_available():
+                self.device = torch.device('mps')
+            elif torch.xpu.is_available():
+                self.device = torch.device('xpu')
+        else:
+            self.device = torch.device('cpu')
 
         if dtype == "fp16":
             self.dtype = torch.float16

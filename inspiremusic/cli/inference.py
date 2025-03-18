@@ -86,7 +86,16 @@ class InspireMusicUnified:
         assert self.min_generate_audio_seconds <= self.max_generate_audio_seconds, "Min audio seconds must be less than or equal to max audio seconds"
 
         use_cuda = gpu >= 0 and torch.cuda.is_available()
-        self.device = torch.device('cuda' if use_cuda else 'cpu')
+        if gpu >=0:
+            if torch.cuda.is_available():
+                self.device = torch.device(f'cuda:{gpu}')
+            elif torch.backends.mps.is_available():
+                self.device = torch.device('mps')
+            elif torch.xpu.is_available():
+                self.device = torch.device('xpu')
+        else:
+            self.device = torch.device('cpu')
+
         self.model = InspireMusic(self.model_dir, load_jit=load_jit, load_onnx=load_onnx, dtype=dtype, fast=fast, fp16=fp16)
 
         logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

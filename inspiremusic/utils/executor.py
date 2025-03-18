@@ -24,13 +24,19 @@ from inspiremusic.utils.train_utils import update_parameter_and_lr, log_per_step
 from torch.cuda.amp import GradScaler, autocast
 
 class Executor:
-
     def __init__(self):
         self.step = 0
         self.epoch = 0
         self.rank = int(os.environ.get('RANK', 0))
-        self.device = torch.device('cuda:{}'.format(self.rank))
-
+        if torch.cuda.is_available():
+            if torch.cuda.is_available():
+                self.device = torch.device('cuda:{}'.format(self.rank))
+            elif torch.backends.mps.is_available():
+                self.device = torch.device('mps')
+            elif torch.xpu.is_available():
+                self.device = torch.device('xpu')
+        else:
+            self.device = torch.device('cpu')
     def train_one_epoch(self, model, optimizer, scheduler, train_data_loader, cv_data_loader, writer, info_dict, group_join, scaler=None):
         ''' Train one epoch
         '''

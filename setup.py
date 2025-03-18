@@ -55,8 +55,8 @@ requirements = {
 		"julius",
 		"onnxruntime-gpu==1.16.0",
 		"onnxruntime==1.16.0",
-        "dotenv==0.9.9",
 		"transformers",
+        "dotenv==0.9.9",
         "google-cloud-storage==3.1.0",
         "google-auth==2.38.0",
         "googleapis-common-protos==1.57.0"

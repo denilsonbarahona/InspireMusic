@@ -333,11 +333,11 @@ Previous test on H800 GPU, InspireMusic-1.5B-Long could generate 30 seconds audi
     - [x] Technical report v1
     - [x] Provide Dockerfile
 
-- [ ] 2025/03
+- [ ] 2025/04
     - [ ] Support audio generation task
     - [ ] InspireAudio model for audio generation
 
-- [ ] 2025/05
+- [ ] 2025/06
     - [ ] Support song generation task
     - [ ] InspireSong model for song generation
 

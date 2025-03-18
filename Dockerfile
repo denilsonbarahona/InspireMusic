@@ -1,16 +1,10 @@
-# Usa una imagen base oficial de NVIDIA con CUDA 11.8 y luego instala PyTorch
+# Usa una imagen base oficial de NVIDIA con CUDA 11.8
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
-
-# Metainformación (opcional, descomentado si lo necesitas)
-# LABEL org.opencontainers.image.source="https://github.com/FunAudioLLM/InspireMusic"
-# LABEL org.opencontainers.image.licenses="Apache License 2.0"
-# LABEL org.opencontainers.image.base.name="nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04"
 
 # Establece variables de entorno
 ENV CUDA_HOME=/usr/local/cuda
 ENV TORCH_CUDA_ARCH_LIST="7.0 7.5 8.0 8.6 8.9"
 ENV DEBIAN_FRONTEND=noninteractive
-# Evita interacciones durante la instalación
 
 # Instala dependencias básicas del sistema, incluyendo Python y git
 RUN apt-get update && apt-get install -y \
@@ -39,13 +33,12 @@ RUN python3 -m pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaud
 # Establece el directorio de trabajo
 WORKDIR /workspace/InspireMusic
 
-# Copia los archivos necesarios al contenedor
+# Copia los archivos necesarios al contenedor, incluyendo README.md
 COPY setup.py /workspace/InspireMusic/
 COPY inspiremusic /workspace/InspireMusic/inspiremusic/
 COPY requirements.txt /workspace/InspireMusic/
-
-# Instala flash-attn explícitamente
-# RUN python3 -m pip install flash-attn==2.6.3 --no-build-isolation
+COPY README.md /workspace/InspireMusic/
+# Necesario para setup.py
 
 # Instala el paquete inspiremusic y sus dependencias usando setup.py
 RUN python3 -m pip install --no-cache-dir -e . --extra-index-url https://download.pytorch.org/whl/cu118

@@ -12,13 +12,17 @@ LABEL org.opencontainers.image.base.name="docker.io/library/pytorch:2.1.0-cuda11
 WORKDIR /workspace/InspireMusic
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y \
     ffmpeg \
     sox \
     libsox-dev \
     git \
-    git-lfs \
-    && rm -rf /var/lib/apt/lists/*
+    git-lfs && \
+    # Verificar que git esté instalado
+    git --version && \
+    # Limpiar después de instalar todo
+    rm -rf /var/lib/apt/lists/*
 
 # Initialize git-lfs
 RUN git lfs install
@@ -32,14 +36,23 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install flash-attn
 RUN pip install flash-attn==2.6.3 --no-build-isolation
 
-# Download models
+# Install Google Cloud Storage library (needed for GCS upload)
+RUN pip install google-cloud-storage
+
+# Download models from HuggingFace (recommended, as they are public)
 RUN mkdir -p /workspace/InspireMusic/pretrained_models && \
     cd /workspace/InspireMusic/pretrained_models && \
-    git clone https://modelscope.cn/models/iic/InspireMusic-1.5B-Long.git && \
-    git clone https://modelscope.cn/models/iic/InspireMusic.git && \
-    git clone https://modelscope.cn/models/iic/InspireMusic-1.5B.git && \
-    git clone https://modelscope.cn/models/iic/InspireMusic-Base-24kHz.git && \
-    git clone https://modelscope.cn/models/iic/InspireMusic-1.5B-24kHz.git
+    git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && \
+    git clone https://huggingface.co/FunAudioLLM/InspireMusic.git && \
+    git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B.git && \
+    git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz.git && \
+    git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz.git
+
+# Copy GCP credentials (ensure the file exists in the build context)
+COPY gcp-credentials.json /workspace/InspireMusic/gcp-credentials.json
+
+# Set environment variable for GCP credentials
+ENV GOOGLE_APPLICATION_CREDENTIALS=/workspace/InspireMusic/gcp-credentials.json
 
 # Set the entrypoint (optional, we'll override it in RunPod Serverless)
 CMD ["bash"]

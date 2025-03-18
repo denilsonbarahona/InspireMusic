@@ -27,7 +27,6 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append('{}/third_party/Matcha-TTS'.format(ROOT_DIR))
 
 import spaces
-import gradio as gr
 from inspiremusic.cli.inference import InspireMusicUnified, set_env_variables
 import torchaudio
 import datetime

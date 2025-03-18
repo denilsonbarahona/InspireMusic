@@ -1,5 +1,6 @@
 # Use PyTorch 2.1 GPU base image with Python 3.8 and CUDA 11.8 on Ubuntu 22.04
-FROM pytorch/pytorch:2.1-gpu-py38-cu118-ubuntu22.04
+# FROM pytorch/pytorch:2.1-gpu-py38-cu118-ubuntu22.04
+FROM nvidia/cuda:12.1.1-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 # metainformation
@@ -14,6 +15,11 @@ COPY . .
 
 # inatall library dependencies
 RUN apt-get update && apt-get install -y ffmpeg sox libsox-dev
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir -r requirements.txt
 
 # install flash attention

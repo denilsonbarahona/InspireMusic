@@ -59,7 +59,8 @@ requirements = {
         "dotenv==0.9.9",
         "google-cloud-storage==3.1.0",
         "google-auth==2.38.0",
-        "googleapis-common-protos==1.57.0"
+        "googleapis-common-protos==1.57.0",
+        "runpod==1.7.7"
     ],
     # train: The modules invoked when training only.
     "train": [

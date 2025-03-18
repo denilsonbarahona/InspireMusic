@@ -14,11 +14,16 @@
 
 import os
 
-os.system('nvidia-smi')
-os.system('apt update -y && apt-get install -y apt-utils && apt install -y unzip')
-os.environ['PYTHONPATH'] = 'third_party/Matcha-TTS'
-os.system('mkdir pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base.git &&git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git &&git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B.git &&git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz.git &&git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz.git && for i in InspireMusic-Base InspireMusic-Base-24kHz InspireMusic-1.5B InspireMusic-1.5B-24kHz InspireMusic-1.5B-Long; do sed -i -e "s/\.\.\/\.\.\///g" ${i}/inspiremusic.yaml; done && cd ..')
 
+## os.system('nvidia-smi')
+## os.system('apt update -y && apt-get install -y apt-utils && apt install -y unzip')
+os.environ['PYTHONPATH'] = 'third_party/Matcha-TTS'
+command = r'mkdir -p pretrained_models && cd pretrained_models && [ ! -d "InspireMusic-Base" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base.git || echo "InspireMusic-Base ya existe"; [ ! -d "InspireMusic-1.5B-Long" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git || echo "InspireMusic-1.5B-Long ya existe"; [ ! -d "InspireMusic-1.5B" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B.git || echo "InspireMusic-1.5B ya existe"; [ ! -d "InspireMusic-1.5B-24kHz" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz.git || echo "InspireMusic-1.5B-24kHz ya existe"; [ ! -d "InspireMusic-Base-24kHz" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz.git || echo "InspireMusic-Base-24kHz ya existe"; for i in InspireMusic-Base InspireMusic-Base-24kHz InspireMusic-1.5B InspireMusic-1.5B-24kHz InspireMusic-1.5B-Long; do sed -i "" -e "s|\.\./\.\./||g" "${i}/inspiremusic.yaml"; done && cd ..'
+##command = r'mkdir -p pretrained_models && cd pretrained_models && [ ! -d "InspireMusic-Base" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base.git || echo "InspireMusic-Base ya existe"; [ ! -d "InspireMusic-1.5B-Long" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git || echo "InspireMusic-1.5B-Long ya existe"; [ ! -d "InspireMusic-1.5B" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B.git || echo "InspireMusic-1.5B ya existe"; [ ! -d "InspireMusic-1.5B-24kHz" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz.git || echo "InspireMusic-1.5B-24kHz ya existe"; [ ! -d "InspireMusic-Base-24kHz" ] && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz.git || echo "InspireMusic-Base-24kHz ya existe"; for i in InspireMusic-Base InspireMusic-Base-24kHz InspireMusic-1.5B InspireMusic-1.5B-24kHz InspireMusic-1.5B-Long; do sed -i "" -e "s|\.\./\.\./||g" "${i}/inspiremusic.yaml"; done && cd ..'
+##command = 'mkdir -p pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz.git && for i in InspireMusic-Base InspireMusic-Base-24kHz InspireMusic-1.5B InspireMusic-1.5B-24kHz InspireMusic-1.5B-Long; do sed -i -e "s/\\.\\.\\/\\.\\.\\/\//g" ${i}/inspiremusic.yaml; done && cd ..'
+os.system(command)
+##os.system('mkdir -p pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz.git && for i in InspireMusic-Base InspireMusic-Base-24kHz InspireMusic-1.5B InspireMusic-1.5B-24kHz InspireMusic-1.5B-Long; do sed -i -e "s/\.\.\/\.\.\///g" ${i}/inspiremusic.yaml; done && cd ..')
+## command = 'mkdir -p pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz.git && git clone https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz.git && for i in InspireMusic-Base InspireMusic-Base-24kHz InspireMusic-1.5B InspireMusic-1.5B-24kHz InspireMusic-1.
 import sys
 import torch
 print(torch.backends.cudnn.version())
@@ -26,13 +31,17 @@ print(torch.backends.cudnn.version())
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append('{}/third_party/Matcha-TTS'.format(ROOT_DIR))
 
-import spaces
+##import spaces
+import runpod
 from inspiremusic.cli.inference import InspireMusicUnified, set_env_variables
 import torchaudio
 import datetime
 import hashlib
 import importlib
+from utils.config import config
 from utils.storage import storage_client
+
+runpod.api_key = config.get_runpod_api_key()
 
 MODELS = ["InspireMusic-1.5B-Long", "InspireMusic-1.5B", "InspireMusic-Base", "InspireMusic-1.5B-24kHz", "InspireMusic-Base-24kHz"]
 AUDIO_PROMPT_DIR = "demo/audio_prompts"
@@ -102,7 +111,7 @@ def trim_audio(audio_file, cut_seconds=5):
 	torchaudio.save(output_path, cutted_audio, sr)
 	return output_path
 
-@spaces.GPU(duration=120)
+##@spaces.GPU(duration=120)
 def music_generation(args):
 	set_env_variables()
 	model = InspireMusicUnified(
@@ -165,4 +174,4 @@ def handler(event):
     output_path = demo_inspiremusic_t2m(text_input, model_name, chorus, output_sample_rate, max_generate_audio_seconds)
     storage_client.upload_file(output_path, fileName)
 	
-	
+runpod.serverless.start({"handler": handler})

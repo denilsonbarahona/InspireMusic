@@ -8,6 +8,7 @@ class Config:
     def __init__(self):
         load_dotenv()
         self.hf_token = os.getenv("HF_TOKEN")
+        self.runpodKey = os.getenv('RUNPOD_API_KEY')
         self.gcp_project_id = os.getenv("GCP_PROJECT_ID")
         self.gcp_client_email = os.getenv("GCP_CLIENT_EMAIL")
         self.gcp_private_key = self.get_gcp_private_key()  # clave formateada correctamente
@@ -29,5 +30,8 @@ class Config:
     def get_gcp_private_key(self) -> str:
         key = os.getenv("GCP_PRIVATE_KEY")
         return key.replace("\\n", "\n") if key else key
+    
+    def get_runpod_api_key(self) -> str:
+        return self.runpodKey
 
 config = Config()

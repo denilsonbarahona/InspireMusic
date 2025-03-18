@@ -57,9 +57,9 @@ class InspireMusicUnified:
         # Set model_dir or default to downloading if it doesn't exist
         if model_dir is None:
             if sys.platform == "win32":
-                model_dir = f"..\..\pretrained_models\{model_name}"
+                model_dir = rf"..\..\pretrained_models\{model_name}"
             else:
-                model_dir = f"../../pretrained_models/{model_name}"
+                model_dir = rf"../../pretrained_models/{model_name}"
 
         if not os.path.isfile(os.path.join(model_dir, "llm.pt")):
             if hub == "modelscope":

@@ -1,6 +1,8 @@
 # Use PyTorch 2.1 GPU base image with Python 3.8 and CUDA 11.8 on Ubuntu 22.04
 FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Metainformation
 LABEL org.opencontainers.image.source="https://github.com/FunAudioLLM/InspireMusic"
 LABEL org.opencontainers.image.licenses="Apache License 2.0"

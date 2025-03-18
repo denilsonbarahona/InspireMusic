@@ -45,7 +45,7 @@ COPY inspiremusic /workspace/InspireMusic/inspiremusic/
 COPY requirements.txt /workspace/InspireMusic/
 
 # Instala flash-attn explícitamente
-RUN python3 -m pip install flash-attn==2.6.3 --no-build-isolation
+# RUN python3 -m pip install flash-attn==2.6.3 --no-build-isolation
 
 # Instala el paquete inspiremusic y sus dependencias usando setup.py
 RUN python3 -m pip install --no-cache-dir -e . --extra-index-url https://download.pytorch.org/whl/cu118

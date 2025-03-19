@@ -40,6 +40,8 @@ COPY requirements.txt /workspace/InspireMusic/
 COPY README.md /workspace/InspireMusic/
 # Necesario para setup.py
 
+RUN python3 -m pip install gradio==4.43.0 --no-cache-dir
+
 # Instala el paquete inspiremusic y sus dependencias usando setup.py
 RUN python3 -m pip install --no-cache-dir -e . --extra-index-url https://download.pytorch.org/whl/cu118
 

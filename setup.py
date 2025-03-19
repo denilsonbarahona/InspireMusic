@@ -25,7 +25,7 @@ requirements = {
 		"conformer==0.3.2",
 		"diffusers==0.27.2",
 		"gdown==5.1.0",
-		"gradio===5.7.0",
+		"gradio==4.43.0",
 		"grpcio==1.57.0",
 		"grpcio-tools==1.57.0",
 		"hydra-core==1.3.2",
@@ -60,7 +60,7 @@ requirements = {
         "google-cloud-storage==3.1.0",
         "google-auth==2.38.0",
         "googleapis-common-protos==1.57.0",
-        "runpod==1.7.7"
+        "runpod==1.7.0"
     ],
     # train: The modules invoked when training only.
     "train": [

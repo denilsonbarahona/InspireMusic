@@ -27,7 +27,7 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append('{}/third_party/Matcha-TTS'.format(ROOT_DIR))
 
 import spaces
-import gradio as gr
+#import gradio as gr
 from inspiremusic.cli.inference import InspireMusicUnified, set_env_variables
 import torchaudio
 import datetime
@@ -151,59 +151,59 @@ def demo_inspiremusic_con(text, audio, model_name, chorus,
 			max_generate_audio_seconds=max_generate_audio_seconds)
 	return music_generation(args)
 
-def main():
-	with gr.Blocks(theme=gr.themes.Soft()) as demo:
-		gr.Markdown("""
+#def main():
+	##with gr.Blocks(theme=gr.themes.Soft()) as demo:
+	##	gr.Markdown("""
 		# InspireMusic
-		- Support music generation tasks with long-form and high audio quality, sampling rates up to 48kHz. 
-		- Github: https://github.com/FunAudioLLM/InspireMusic/  |  ModelScope Studio: https://modelscope.cn/studios/iic/InspireMusic
-		- Available music generation models: [InspireMusic-1.5B-Long](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long), [InspireMusic-1.5B](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B), [InspireMusic-Base](https://huggingface.co/FunAudioLLM/InspireMusic-Base), [InspireMusic-1.5B-24kHz](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz), [InspireMusic-Base-24kHz](https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz). Both on Huggingface and ModelScope.
-		- Currently only support English text prompts.
-		- This page is for demo purpose, if you want to generate long-form audio, e.g., 5mins, please try to deploy locally. Thank you for your support.
-		""")
+	##	- Support music generation tasks with long-form and high audio quality, sampling rates up to 48kHz. 
+	#	- Github: https://github.com/FunAudioLLM/InspireMusic/  |  ModelScope Studio: https://modelscope.cn/studios/iic/InspireMusic
+	#	- Available music generation models: [InspireMusic-1.5B-Long](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long), [InspireMusic-1.5B](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B), [InspireMusic-Base](https://huggingface.co/FunAudioLLM/InspireMusic-Base), [InspireMusic-1.5B-24kHz](https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-24kHz), [InspireMusic-Base-24kHz](https://huggingface.co/FunAudioLLM/InspireMusic-Base-24kHz). Both on Huggingface and ModelScope.
+	#	- Currently only support English text prompts.
+	#	- This page is for demo purpose, if you want to generate long-form audio, e.g., 5mins, please try to deploy locally. Thank you for your support.
+	#	""")
 
-		with gr.Row(equal_height=True):
-			model_name = gr.Dropdown(
-					MODELS, label="Select Model Name",
-					value="InspireMusic-1.5B-Long")
-			chorus = gr.Dropdown(["intro", "verse", "chorus", "outro"],
-								 label="Chorus Mode", value="intro")
-			output_sample_rate = gr.Dropdown([48000, 24000],
-											 label="Output Audio Sample Rate (Hz)",
-											 value=48000)
-			max_generate_audio_seconds = gr.Slider(10, 300,
-												   label="Generate Audio Length (s)",
-												   value=30)
+		## with gr.Row(equal_height=True):
+		##	model_name = gr.Dropdown(
+		##			MODELS, label="Select Model Name",
+		##			value="InspireMusic-1.5B-Long")
+		##	chorus = gr.Dropdown(["intro", "verse", "chorus", "outro"],
+		##						 label="Chorus Mode", value="intro")
+		##	output_sample_rate = gr.Dropdown([48000, 24000],
+		##									 label="Output Audio Sample Rate (Hz)",
+		##									 value=48000)
+		##	max_generate_audio_seconds = gr.Slider(10, 300,
+		##										   label="Generate Audio Length (s)",
+		##										   value=30)
 
-		with gr.Row(equal_height=True):
-			text_input = gr.Textbox(label="Input Text (For Text-to-Music Task)",
-									value="Experience soothing and sensual instrumental jazz with a touch of Bossa Nova, perfect for a relaxing restaurant or spa ambiance.")
+		##with gr.Row(equal_height=True):
+		##	text_input = gr.Textbox(label="Input Text (For Text-to-Music Task)",
+		##							value="Experience soothing and sensual instrumental jazz with a touch of Bossa Nova, perfect for a relaxing restaurant or spa ambiance.")
 
-			audio_input = gr.Audio(
-				label="Input Audio Prompt (For Music Continuation Task)",
-				type="filepath")
-		music_output = gr.Audio(label="Generated Music", type="filepath", autoplay=True, show_download_button = True)
+		##	audio_input = gr.Audio(
+		##		label="Input Audio Prompt (For Music Continuation Task)",
+		##		type="filepath")
+		##music_output = gr.Audio(label="Generated Music", type="filepath", autoplay=True, show_download_button = True)
 
-		with gr.Row():
-			button = gr.Button("Start Text-to-Music Task")
-			button.click(demo_inspiremusic_t2m,
-						 inputs=[text_input, model_name,
-								 chorus,
-								 output_sample_rate,
-								 max_generate_audio_seconds],
-						 outputs=music_output)
+		##with gr.Row():
+		##	button = gr.Button("Start Text-to-Music Task")
+		##	button.click(demo_inspiremusic_t2m,
+		##				 inputs=[text_input, model_name,
+		##						 chorus,
+		##						 output_sample_rate,
+		##						 max_generate_audio_seconds],
+		##				 outputs=music_output)
 
-			generate_button = gr.Button("Start Music Continuation Task")
-			generate_button.click(demo_inspiremusic_con,
-								  inputs=[text_input, audio_input, model_name,
-										  chorus,
-										  output_sample_rate,
-										  max_generate_audio_seconds],
-								  outputs=music_output)
-		t2m_examples = gr.Examples(examples=DEMO_TEXT_PROMPTS, inputs=[text_input])
-	demo.launch()
+		##	generate_button = gr.Button("Start Music Continuation Task")
+		##	generate_button.click(demo_inspiremusic_con,
+		##						  inputs=[text_input, audio_input, model_name,
+		##								  chorus,
+		##								  output_sample_rate,
+		##								  max_generate_audio_seconds],
+		##						  outputs=music_output)
+		## t2m_examples = gr.Examples(examples=DEMO_TEXT_PROMPTS, inputs=[text_input])
+	#demo.launch()
 
-if __name__ == '__main__':
-	os.makedirs(AUDIO_PROMPT_DIR, exist_ok=True)
-	os.makedirs(OUTPUT_AUDIO_DIR, exist_ok=True)
-	main()
+#if __name__ == '__main__':
+#	os.makedirs(AUDIO_PROMPT_DIR, exist_ok=True)
+#	os.makedirs(OUTPUT_AUDIO_DIR, exist_ok=True)
+#	main()

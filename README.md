@@ -320,6 +320,8 @@ done
 ### Hardware & Execution Time
 Previous test on H800 GPU, InspireMusic-1.5B-Long could generate 30 seconds audio with real-time factor (RTF) around 1.6~1.8. For normal mode, we recommend using hardware with at least 24GB of GPU memory for better experience. For fast mode, 12GB GPU memory is enough. If you want to generate longer audio, you may increase the `--max_generate_audio_seconds` inference parameter with larger GPU memory.
 
+Support inference on Linux/Unix, macOS, Windows systems. 
+
 ## Roadmap
 - [x] 2024/12
   - [x] 75Hz InspireMusic-Base model for music generation

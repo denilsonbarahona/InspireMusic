@@ -25,7 +25,6 @@ requirements = {
 		"conformer==0.3.2",
 		"diffusers==0.27.2",
 		"gdown==5.1.0",
-		"gradio>=4.44.1",
 		"grpcio==1.57.0",
 		"grpcio-tools==1.57.0",
 		"hydra-core==1.3.2",

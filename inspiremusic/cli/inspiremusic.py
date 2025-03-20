@@ -16,7 +16,7 @@ import sys
 import time
 from tqdm import tqdm
 from hyperpyyaml import load_hyperpyyaml
-from inspiremusic.cli.frontend import InspireMusicFrontEnd
+## from inspiremusic.cli.frontend import InspireMusicFrontEnd
 from inspiremusic.cli.model import InspireMusicModel
 from inspiremusic.utils.file_utils import logging
 from inspiremusic.utils.utils import download_model
@@ -49,7 +49,7 @@ class InspireMusic:
         with open(os.path.join(model_dir, 'inspiremusic.yaml'), 'r') as f:
             configs = load_hyperpyyaml(f)
 
-        self.frontend = InspireMusicFrontEnd(configs,
+        """ self.frontend = InspireMusicFrontEnd(configs,
                                           configs['get_tokenizer'],
                                           '{}/llm.pt'.format(model_dir),
                                           '{}/flow.pt'.format(model_dir),
@@ -59,7 +59,7 @@ class InspireMusic:
                                           dtype,
                                           fast,
                                           fp16,
-                                          configs['allowed_special'])
+                                          configs['allowed_special']) """
 
         self.model = InspireMusicModel(configs['llm'], configs['flow'], configs['hift'], configs['wavtokenizer'], dtype, fast, fp16)
         self.model.load(os.path.join(model_dir, 'llm.pt'),

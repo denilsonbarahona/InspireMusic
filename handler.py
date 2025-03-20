@@ -82,7 +82,7 @@ def get_args(
 		"fade_out"                  : True,
 		"trim"                      : trim,
 		"output_sample_rate"        : output_sample_rate,
-		"min_generate_audio_seconds": 10.0,
+		"min_generate_audio_seconds": 1.0,
 		"max_generate_audio_seconds": max_generate_audio_seconds,
 		"max_audio_prompt_length": 5.0,
 		"model_dir"                 : os.path.join("pretrained_models",

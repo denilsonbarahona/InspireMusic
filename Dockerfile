@@ -23,9 +23,6 @@ RUN apt-get update && apt-get install -y \
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1 \
     && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
 
-# install flash attention
-RUN pip install flash-attn==2.6.3 --no-build-isolation
-
 # Actualiza pip
 RUN python3 -m pip install --upgrade pip
 

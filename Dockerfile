@@ -43,7 +43,7 @@ COPY README.md /workspace/InspireMusic/
 # RUN python3 -m pip install gradio==4.43.0 --no-cache-dir
 
 # Instala el paquete inspiremusic y sus dependencias usando setup.py
-RUN python3 -m pip install --no-cache-dir -e requirements.txt --extra-index-url https://download.pytorch.org/whl/cu118
+RUN python3 -m pip install --no-cache-dir -e . --extra-index-url https://download.pytorch.org/whl/cu118
 #RUN pip install --no-cache-dir -r requirements.txt
 
 # Crea el directorio y descarga los modelos preentrenados

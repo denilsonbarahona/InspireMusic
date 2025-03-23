@@ -42,8 +42,8 @@ class InspireMusicModel:
                 self.device = torch.device('cuda')
             elif torch.backends.mps.is_available():
                 self.device = torch.device('mps')
-            elif torch.xpu.is_available():
-                self.device = torch.device('xpu')
+            #elif torch.xpu.is_available():
+            #    self.device = torch.device('xpu')
         else:
             self.device = torch.device('cpu')
 

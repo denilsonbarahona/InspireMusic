@@ -3,7 +3,7 @@ FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
 
 # Establece variables de entorno
 ENV CUDA_HOME=/usr/local/cuda
-ENV TORCH_CUDA_ARCH_LIST="7.0 7.5 8.0 8.6 8.9"
+#ENV TORCH_CUDA_ARCH_LIST="7.0 7.5 8.0 8.6 8.9"
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Instala dependencias básicas del sistema, incluyendo Python y git

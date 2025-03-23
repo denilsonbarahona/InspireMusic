@@ -33,8 +33,8 @@ class Executor:
                 self.device = torch.device('cuda:{}'.format(self.rank))
             elif torch.backends.mps.is_available():
                 self.device = torch.device('mps')
-            elif torch.xpu.is_available():
-                self.device = torch.device('xpu')
+            #elif torch.xpu.is_available():
+            #    self.device = torch.device('xpu')
         else:
             self.device = torch.device('cpu')
     def train_one_epoch(self, model, optimizer, scheduler, train_data_loader, cv_data_loader, writer, info_dict, group_join, scaler=None):

@@ -20,10 +20,12 @@ import os
 os.system('nvidia-smi')
 os.system('apt update -y && apt-get install -y apt-utils && apt install -y unzip')
 os.environ['PYTHONPATH'] = 'third_party/Matcha-TTS'
-os.system(r'mkdir pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && && for i in InspireMusic-1.5B-Long; do sed -i -e "s/\.\.\/\.\.\///g" ${i}/inspiremusic.yaml; done && cd ..')
+##os.system(r'mkdir pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && && for i in InspireMusic-1.5B-Long; do sed -i -e "s/\.\.\/\.\.\///g" ${i}/inspiremusic.yaml; done && cd ..')
+os.system(r'[ -d pretrained_models ] || mkdir pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && for i in InspireMusic-1.5B-Long; do sed -i -e "s/\.\.\/\.\.\///g" ${i}/inspiremusic.yaml; done && cd ..')
 
 import sys
 import torch
+import runpod
 print(torch.backends.cudnn.version())
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -35,9 +37,13 @@ from inspiremusic.cli.inference import InspireMusicUnified, set_env_variables
 import torchaudio
 import datetime
 import hashlib
+from utils.config import config
+from utils.storage import storage_client
 import importlib
 
-MODELS = ["InspireMusic-1.5B-Long", "InspireMusic-1.5B", "InspireMusic-Base", "InspireMusic-1.5B-24kHz", "InspireMusic-Base-24kHz"]
+runpod.api_key = config.get_runpod_api_key()
+
+MODELS = ["InspireMusic-1.5B-Long"]
 AUDIO_PROMPT_DIR = "demo/audio_prompts"
 OUTPUT_AUDIO_DIR = "demo/outputs"
 
@@ -155,3 +161,16 @@ def demo_inspiremusic_con(text, audio, model_name, chorus,
 			max_generate_audio_seconds=max_generate_audio_seconds)
 	return music_generation(args)
 
+def handler(event):
+    input_data = event["input"]
+    model_name = input_data['model_name']
+    chorus = input_data['chorus']
+    text_input = input_data['prompt']
+    fileName = input_data['fileName']
+    output_sample_rate= 48000
+    max_generate_audio_seconds= input_data['duration']
+	
+    output_path = demo_inspiremusic_t2m(text_input, model_name, chorus, output_sample_rate, max_generate_audio_seconds)
+    storage_client.upload_file(output_path, fileName)
+	
+runpod.serverless.start({"handler": handler})

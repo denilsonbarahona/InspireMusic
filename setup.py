@@ -56,13 +56,8 @@ requirements = {
 		"onnxruntime-gpu==1.16.0",
 		"onnxruntime==1.16.0",
         "runpod==1.7.7",
-        "google-api-core==2.24.2",
         "google-auth==2.38.0",
-        "google-cloud-core==2.4.3",
         "google-cloud-storage==3.1.0",
-        "google-crc32c==1.7.0",
-        "google-resumable-media==2.7.2",
-        "googleapis-common-protos==1.69.2",
 		"transformers",
     ],
     # train: The modules invoked when training only.

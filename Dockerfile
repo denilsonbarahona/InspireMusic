@@ -52,4 +52,5 @@ RUN mkdir -p /workspace/InspireMusic/pretrained_models && \
     git clone https://modelscope.cn/models/iic/InspireMusic-1.5B-Long.git
 
 # Comando por defecto para pruebas
-CMD ["python3", "-m", "inspiremusic", "--help"]
+## CMD ["python3", "-m", "inspiremusic", "--help"]
+CMD ["python3", "handler.py"]

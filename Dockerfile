@@ -34,10 +34,11 @@ RUN python3 -m pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaud
 WORKDIR /workspace/InspireMusic
 
 # Copia los archivos necesarios al contenedor, incluyendo README.md
-COPY setup.py /workspace/InspireMusic/
-COPY inspiremusic /workspace/InspireMusic/inspiremusic/
-COPY requirements.txt /workspace/InspireMusic/
-COPY README.md /workspace/InspireMusic/
+COPY . .
+#COPY setup.py /workspace/InspireMusic/
+#COPY inspiremusic /workspace/InspireMusic/inspiremusic/
+#COPY requirements.txt /workspace/InspireMusic/
+#COPY README.md /workspace/InspireMusic/
 # Necesario para setup.py
 
 # RUN python3 -m pip install gradio==4.43.0 --no-cache-dir

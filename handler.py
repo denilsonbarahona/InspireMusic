@@ -21,7 +21,7 @@ os.system('nvidia-smi')
 os.system('apt update -y && apt-get install -y apt-utils && apt install -y unzip')
 os.environ['PYTHONPATH'] = 'third_party/Matcha-TTS'
 ##os.system(r'mkdir pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && && for i in InspireMusic-1.5B-Long; do sed -i -e "s/\.\.\/\.\.\///g" ${i}/inspiremusic.yaml; done && cd ..')
-os.system(r'[ -d pretrained_models ] || mkdir pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && for i in InspireMusic-1.5B-Long; do sed -i -e "s/\.\.\/\.\.\///g" ${i}/inspiremusic.yaml; done && cd ..')
+## os.system(r'[ -d pretrained_models ] || mkdir pretrained_models && cd pretrained_models && git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git && for i in InspireMusic-1.5B-Long; do sed -i -e "s/\.\.\/\.\.\///g" ${i}/inspiremusic.yaml; done && cd ..')
 
 import sys
 import torch

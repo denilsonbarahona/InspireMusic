@@ -3,7 +3,6 @@ FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
 
 # Establece variables de entorno
 ENV CUDA_HOME=/usr/local/cuda
-#ENV TORCH_CUDA_ARCH_LIST="7.0 7.5 8.0 8.6 8.9"
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Instala dependencias básicas del sistema, incluyendo Python y git
@@ -35,23 +34,15 @@ WORKDIR /workspace/InspireMusic
 
 # Copia los archivos necesarios al contenedor, incluyendo README.md
 COPY . .
-#COPY setup.py /workspace/InspireMusic/
-#COPY inspiremusic /workspace/InspireMusic/inspiremusic/
-#COPY requirements.txt /workspace/InspireMusic/
-#COPY README.md /workspace/InspireMusic/
-# Necesario para setup.py
-
-# RUN python3 -m pip install gradio==4.43.0 --no-cache-dir
 
 # Instala el paquete inspiremusic y sus dependencias usando setup.py
 RUN python3 -m pip install --no-cache-dir -e . --extra-index-url https://download.pytorch.org/whl/cu118
-#RUN pip install --no-cache-dir -r requirements.txt
 
 # Crea el directorio y descarga los modelos preentrenados
-RUN mkdir -p /workspace/InspireMusic/pretrained_models && \
-    cd /workspace/InspireMusic/pretrained_models && \
-    git clone https://modelscope.cn/models/iic/InspireMusic-1.5B-Long.git
+RUN mkdir -p /workspace/InspireMusic/pretrained_models
+RUN cd /workspace/InspireMusic/pretrained_models
+RUN git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git
+RUN sed -i -e "s/\.\.\/\.\.\///g" /workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long/inspiremusic.yaml
 
 # Comando por defecto para pruebas
-## CMD ["python3", "-m", "inspiremusic", "--help"]
 CMD ["python3", "handler.py"]

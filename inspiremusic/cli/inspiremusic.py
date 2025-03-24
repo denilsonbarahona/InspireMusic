@@ -26,13 +26,13 @@ class InspireMusic:
     def __init__(self, model_dir, load_jit=True, load_onnx=False, dtype = "fp16", fast = False, fp16=True, hub="modelscope", repo_url=None, token=None):
         instruct = True if '-Instruct' in model_dir else False
 
-        if model_dir is None:
+        """ if model_dir is None:
             if sys.platform == "win32":
                 model_dir = f"..\..\pretrained_models\{model_name}"
             else:
-                model_dir = f"../../pretrained_models/{model_name}"
+                model_dir = f"../../pretrained_models/{model_name}" """
 
-        if not os.path.isfile(os.path.join(model_dir, "llm.pt")):
+        """ if not os.path.isfile(os.path.join(model_dir, "llm.pt")):
             model_name = model_dir.split("/")[-1]
             if hub == "modelscope":
                 from modelscope import snapshot_download
@@ -44,7 +44,7 @@ class InspireMusic:
                 from huggingface_hub import snapshot_download
                 snapshot_download(repo_id=f"FunAudioLLM/{model_name}", local_dir=model_dir)
             else:
-                download_model(repo_url, model_dir, token)
+                download_model(repo_url, model_dir, token) """
 
         with open(os.path.join(model_dir, 'inspiremusic.yaml'), 'r') as f:
             configs = load_hyperpyyaml(f)

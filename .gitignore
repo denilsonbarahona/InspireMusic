@@ -170,3 +170,4 @@ cython_debug/
 #InspireMusic
 exp/
 pretrained_models/
+.dockerignore

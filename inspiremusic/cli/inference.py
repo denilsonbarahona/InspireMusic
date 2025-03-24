@@ -55,7 +55,7 @@ class InspireMusicUnified:
         os.environ['CUDA_VISIBLE_DEVICES'] = str(gpu)
 
         # Set model_dir or default to downloading if it doesn't exist
-        if model_dir is None:
+        """ if model_dir is None:
             if sys.platform == "win32":
                 model_dir = f"..\..\pretrained_models\{model_name}"
             else:
@@ -70,7 +70,7 @@ class InspireMusicUnified:
                     snapshot_download(f"iic/{model_name}", local_dir=model_dir)
             elif hub == "huggingface":
                 from huggingface_hub import snapshot_download
-                snapshot_download(repo_id=f"FunAudioLLM/{model_name}", local_dir=model_dir)
+                snapshot_download(repo_id=f"FunAudioLLM/{model_name}", local_dir=model_dir) """
 
         self.model_dir = model_dir
 
@@ -96,6 +96,7 @@ class InspireMusicUnified:
         else:
             self.device = torch.device('cpu')
 
+        print(self.model_dir, 'self.model_dir')
         self.model = InspireMusic(self.model_dir, load_jit=load_jit, load_onnx=load_onnx, dtype=dtype, fast=fast, fp16=fp16)
 
         logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

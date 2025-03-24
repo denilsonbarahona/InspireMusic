@@ -10,12 +10,15 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     git \
+    git-lfs \
     python3.8 \
     python3-pip \
     python3-dev \
     ffmpeg \
     sox \
     libsox-dev \
+    apt-utils \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # Establece Python 3.8 como predeterminado
@@ -42,6 +45,9 @@ RUN python3 -m pip install --no-cache-dir -e . --extra-index-url https://downloa
 RUN mkdir -p /workspace/InspireMusic/pretrained_models && \
     if [ ! -d "/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long" ]; then \
         git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git /workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long; \
+        cd InspireMusic-1.5B-Long && \
+        git lfs install && \
+        git lfs pull; \
     fi
     
 # Aplica el ajuste al archivo inspiremusic.yaml si existe

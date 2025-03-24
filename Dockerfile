@@ -49,16 +49,8 @@ RUN mkdir -p /workspace/InspireMusic/pretrained_models
 # Descarga los modelos usando huggingface_hub
 RUN python3 -c "from huggingface_hub import snapshot_download; \
     print('Descargando InspireMusic-1.5B-Long...'); \
-    snapshot_download(repo_id='FunAudioLLM/InspireMusic-1.5B-Long', local_dir='/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long') || { echo 'Error: Fallo al descargar InspireMusic-1.5B-Long'; exit 1; };"
+    snapshot_download(repo_id='FunAudioLLM/InspireMusic-1.5B-Long', local_dir='/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long');"
 
-# Crea el directorio y descarga los modelos preentrenados
-#RUN mkdir -p /workspace/InspireMusic/pretrained_models && \
-#    if [ ! -d "/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long" ]; then \
-#        git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git /workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long; \
-#        cd InspireMusic-1.5B-Long && \
-#        git lfs install && \
-#        git lfs pull; \
-#    fi
     
 # Aplica el ajuste al archivo inspiremusic.yaml si existe
 RUN if [ -f "/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long/inspiremusic.yaml" ]; then \

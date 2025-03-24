@@ -43,6 +43,9 @@ COPY . .
 # Instala el paquete inspiremusic y sus dependencias usando setup.py
 RUN python3 -m pip install --no-cache-dir -e . --extra-index-url https://download.pytorch.org/whl/cu118
 
+# install flash attention
+RUN pip install flash-attn==2.6.3 --no-build-isolation
+
 # Crea el directorio para los modelos preentrenados
 RUN mkdir -p /workspace/InspireMusic/pretrained_models
 

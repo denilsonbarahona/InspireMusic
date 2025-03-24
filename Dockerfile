@@ -39,10 +39,17 @@ COPY . .
 RUN python3 -m pip install --no-cache-dir -e . --extra-index-url https://download.pytorch.org/whl/cu118
 
 # Crea el directorio y descarga los modelos preentrenados
-RUN mkdir -p /workspace/InspireMusic/pretrained_models
-RUN cd /workspace/InspireMusic/pretrained_models
-RUN git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git
-RUN sed -i -e "s/\.\.\/\.\.\///g" /workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long/inspiremusic.yaml
-
+RUN mkdir -p /workspace/InspireMusic/pretrained_models && \
+    if [ ! -d "/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long" ]; then \
+        git clone https://huggingface.co/FunAudioLLM/InspireMusic-1.5B-Long.git /workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long; \
+    fi
+    
+# Aplica el ajuste al archivo inspiremusic.yaml si existe
+RUN if [ -f "/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long/inspiremusic.yaml" ]; then \
+        sed -i -e "s/\.\.\/\.\.\///g" /workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long/inspiremusic.yaml; \
+    else \
+        echo "Warning: inspiremusic.yaml not found in InspireMusic-1.5B-Long"; \
+        exit 1; \
+    fi    
 # Comando por defecto para pruebas
 CMD ["python3", "handler.py"]

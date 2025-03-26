@@ -63,9 +63,10 @@ RUN if [ -f "/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long/in
         exit 1; \
     fi
 
-# Instala Matcha-TTS como un paquete
+# Instala Matcha-TTS como un paquete con una lista de lo que hay en matcha
 RUN cd /workspace/InspireMusic/third_party/Matcha-TTS && \
     git clone https://github.com/shivammehta25/Matcha-TTS.git && \
+    ls -la && \
     python3 -m pip install --no-cache-dir -r requirements.txt
 
 # Comando por defecto para pruebas

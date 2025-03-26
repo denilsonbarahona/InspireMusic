@@ -65,7 +65,7 @@ RUN if [ -f "/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long/in
 
 # Instala Matcha-TTS como un paquete
 RUN cd /workspace/InspireMusic/third_party/Matcha-TTS && \
-    python3 -m pip install .
-    
+    python3 -m pip install --no-cache-dir -e requirements.txt
+
 # Comando por defecto para pruebas
 CMD ["python3", "handler.py"]

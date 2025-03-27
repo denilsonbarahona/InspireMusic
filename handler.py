@@ -43,7 +43,7 @@ import importlib
 
 runpod.api_key = config.get_runpod_api_key()
 
-MODELS = ["InspireMusic-1.5B-Long"]
+MODELS = ["InspireMusic-Base"]
 AUDIO_PROMPT_DIR = "demo/audio_prompts"
 OUTPUT_AUDIO_DIR = "demo/outputs"
 

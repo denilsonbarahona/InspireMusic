@@ -51,15 +51,15 @@ RUN mkdir -p /workspace/InspireMusic/pretrained_models
 
 # Descarga los modelos usando huggingface_hub
 RUN python3 -c "from huggingface_hub import snapshot_download; \
-    print('Descargando InspireMusic-1.5B-Long...'); \
-    snapshot_download(repo_id='FunAudioLLM/InspireMusic-1.5B-Long', local_dir='/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long');"
+    print('Descargando InspireMusic-Base...'); \
+    snapshot_download(repo_id='FunAudioLLM/InspireMusic-Base', local_dir='/workspace/InspireMusic/pretrained_models/InspireMusic-Base');"
 
     
 # Aplica el ajuste al archivo inspiremusic.yaml si existe
-RUN if [ -f "/workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long/inspiremusic.yaml" ]; then \
-        sed -i -e "s/\.\.\/\.\.\///g" /workspace/InspireMusic/pretrained_models/InspireMusic-1.5B-Long/inspiremusic.yaml; \
+RUN if [ -f "/workspace/InspireMusic/pretrained_models/InspireMusic-Base/inspiremusic.yaml" ]; then \
+        sed -i -e "s/\.\.\/\.\.\///g" /workspace/InspireMusic/pretrained_models/InspireMusic-Base/inspiremusic.yaml; \
     else \
-        echo "Warning: inspiremusic.yaml not found in InspireMusic-1.5B-Long"; \
+        echo "Warning: inspiremusic.yaml not found in InspireMusic-Base"; \
         exit 1; \
     fi
 

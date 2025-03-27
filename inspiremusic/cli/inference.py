@@ -36,7 +36,7 @@ def set_env_variables():
 
 class InspireMusicUnified:
     def __init__(self,
-                 model_name: str = "InspireMusic-1.5B-Long",
+                 model_name: str = "InspireMusic-Base",
                  model_dir: str = None,
                  min_generate_audio_seconds: float = 0.0,
                  max_generate_audio_seconds: float = 30.0,
@@ -223,7 +223,7 @@ class InspireMusicUnified:
 
 def get_args():
     parser = argparse.ArgumentParser(description='Run inference with your model')
-    parser.add_argument('-m', '--model_name', default="InspireMusic-1.5B-Long",
+    parser.add_argument('-m', '--model_name', default="InspireMusic-Base",
                         help='Model name')
     
     parser.add_argument('-d', '--model_dir',
